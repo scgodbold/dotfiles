@@ -1,0 +1,24 @@
+#!/bin/zsh
+# This hook is run after a new virtualenv is activated.
+proj_name=$(echo $VIRTUAL_ENV|awk -F'/' '{print $NF}')
+mkdir $HOME/repos/py/$proj_name
+
+# Move to directory to set up the project
+cd $HOME/repos/py/$proj_name
+curl https://raw.githubusercontent.com/github/gitignore/master/Python.gitignore -o .gitignore
+echo "\n# Ignore Vim swap files\n*.swp" >> .gitignore
+touch README
+
+# Set up git repository
+git init
+git config user.name "Scott Godbold"
+echo -n "Is this a zappos project? [y/n]: "
+read answer
+case "$answer" in
+    Y|y|yes|Yes)
+        git config user.email "sgodbold@zappos.com"
+        ;;
+    N|n|no|No)
+        git config user.email "scgodbold@gmail.com"
+        ;;
+esac
