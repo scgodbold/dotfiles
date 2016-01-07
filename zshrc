@@ -9,6 +9,9 @@ ZSH=$HOME/.oh-my-zsh
 # Vi mode
 bindkey -v
 
+# Of course vim what you even thinkin
+export EDITOR='vim'
+
 # History Size
 export HISTSIZE=10000
 
