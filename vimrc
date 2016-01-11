@@ -1,10 +1,10 @@
 " Vimrc for Scott Godbold's work enviroment
-" Last Update: January 8, 2016
+" Last Update: January 11, 2016
 " Installation Requirements:
-"   flake8 (Through pip)
-"   pylint (Through pip)
-"   tmux
-"   vundle
+"   flake8  (Through pip)
+"   pylint  (Through pip)
+"   tmux    (Through however you like)
+"   vundle  (https://github.com/VundleVim/Vundle.vim)
 " Also make sure the following directories exist
 "   ~/.vim
 "       |
@@ -16,22 +16,22 @@
 
 " Table of Contents                                            *contents*
 
-"   01. Plugin Settings ....................................... |plugins|
-"   02. Colors ................................................. |colors|
+"   01. Plugin Settings ................................. |plugin_config|
+"   02. Colors ........................................... |color_scheme|
 "   03. Tabs and Spaces ................................... |tabs_spaces|
 "   04. UI Configuration .................................... |ui_config|
-"   05. Searching ........................................... |searching|
-"   06. Folding ............................................... |folding|
-"   07. Movement ............................................. |movement|
+"   05. Searching ....................................... |search_config|
+"   06. Folding ........................................ |folding_config|
+"   07. Movement ...................................... |movement_config|
 "   08. Leader Bindings ............................... |leader_bindings|
 "   09. Custom Functions ................................. |custom_funcs|
-"   10. Autogroups ......................................... |autogroups|
-"   11. Syntastic Settings .................................. |syntastic|
+"   10. Autogroups ................................... |autogroup_config|
+"   11. Syntastic Settings ........................... |syntastic_config|
 "   12. Backups & Undos ................................. |backups_undos|
 
 
 " -----------------------------------------------------------------------
-" 01. Plugin Settings                                           *plugins*
+" 01. Plugin Settings                                     *plugin_config*
 " -----------------------------------------------------------------------
 set nocompatible				        " Make this thing uncompatiable with vi because this is vim goddamnit
 filetype off					        " required by vundle
@@ -49,7 +49,7 @@ Plugin 'ctrlpvim/ctrlp.vim'             " Ctrl-p for the file openings
 call vundle#end()   				    " end vundle managed plugins
 
 " -----------------------------------------------------------------------
-" 02. Colors                                                     *colors*
+" 02. Colors                                               *color_scheme*
 " -----------------------------------------------------------------------
 set background=dark		" All about the dark terminals
 set t_Co=256			" And 256 bit color schemes
@@ -82,7 +82,7 @@ set splitbelow      " horizontal splits open below
 set laststatus=2    " Make our airline visible always
 
 " -----------------------------------------------------------------------
-" 05. Searching                                               *searching*
+" 05. Searching                                           *search_config*
 " -----------------------------------------------------------------------
 set incsearch       " search as characters get entered
 set hlsearch        " highlight matches
@@ -96,7 +96,7 @@ nnoremap <leader><space> :nohlsearch<CR>
 set wildignore+=*.pyc,.git/*,*.swp
 
 " -----------------------------------------------------------------------
-" 06. Folding                                                   *folding*
+" 06. Folding                                            *folding_config*
 " -----------------------------------------------------------------------
 set foldenable          " I want to fold
 set foldlevelstart=5    " Show most of the folds to begin with
@@ -107,7 +107,7 @@ set foldmethod=indent   " Fold on indent levels
 nnoremap <space> za
 
 " -----------------------------------------------------------------------
-" 07. Movement                                                 *movement*
+" 07. Movement                                          *movement_config*
 " -----------------------------------------------------------------------
 " move visually vertically not by line
 nnoremap j gj
@@ -166,7 +166,7 @@ endfunc
 nnoremap <tab><tab> :call ToggleNumber()<CR>
 
 " -----------------------------------------------------------------------
-" 10. Autogroups                                             *autogroups*
+" 10. Autogroups                                       *autogroup_config*
 " -----------------------------------------------------------------------
 " 4 space tabs for python scripts
 autocmd FileType python setlocal tabstop=4
@@ -178,7 +178,7 @@ autocmd BufEnter *.sh setlocal shiftwidth=2
 autocmd BufEnter *.sh setlocal softtabstop=2
 
 " -----------------------------------------------------------------------
-" 11. Syntastic Settings                                      *syntastic*
+" 11. Syntastic Settings                               *syntastic_config*
 " -----------------------------------------------------------------------
 set statusline+=%#warningmsg#                   " Syntastic Recommended
 set statusline+=%{SyntasticStatuslineFlag()}    " Syntastic Recommended
