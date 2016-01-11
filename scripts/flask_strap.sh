@@ -17,6 +17,7 @@ buildFlask() {
   echo 'Building a basic app'
   echo "from flask import Flask\n\napp = Flask(__name__)\napp.config.from_object('config')\n\n# a basic view just to affirm we are live\n@app.route('/')\ndef index():\n\treturn 'Hello World'" > app/__init__.py
 }
+
 checkDirectories() {
   # Checks out the directory to prevent the smashy, this well exit code 1 if it detects anything wrong
   VIRTUAL_DIR=$(basename $PWD)
