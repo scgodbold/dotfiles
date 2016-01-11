@@ -19,7 +19,6 @@ export HISTSIZE=10000
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-#ZSH_THEME="robbyrussell"
 ZSH_THEME="nicoulaj"
 
 # Example aliases
@@ -31,6 +30,7 @@ alias gs='git status -s'
 alias ts='tmux new -s'
 alias ta='tmux attach -t'
 alias td='tmux detach-client'
+alias flaskify='~/repos/dotfiles/scripts/flask_strap.sh'
 
 # Python Virtual Enviroments
 export WORKON_HOME=$HOME/.virtualenvs
@@ -39,7 +39,7 @@ source /usr/local/bin/virtualenvwrapper.sh
 
 
 # Set oh my zsh plugins
-plugins=(git last-working-dir pip sudo)
+plugins=(git last-working-dir pip sudo python vi-mode)
 
 source $ZSH/oh-my-zsh.sh
 
