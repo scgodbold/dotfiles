@@ -33,20 +33,21 @@
 " -----------------------------------------------------------------------
 " 01. Plugin Settings                                     *plugin_config*
 " -----------------------------------------------------------------------
-set nocompatible				        " Make this thing uncompatiable with vi because this is vim goddamnit
-filetype off					        " required by vundle
+set nocompatible				            " Make this thing uncompatiable with vi because this is vim goddamnit
+filetype off					            " required by vundle
 
-set rtp+=~/.vim/bundle/Vundle.vim/	    " add vundle to run time path
-call vundle#rc()    				    " required by vundle
+set rtp+=~/.vim/bundle/Vundle.vim/	        " add vundle to run time path
+call vundle#rc()    				        " required by vundle
 
-Plugin 'gmarik/vundle.vim'              " vundle managing vundle for all the meta
-Plugin 'w0ng/vim-hybrid'                " hybrid color scheme for the pretty
-Plugin 'scrooloose/syntastic'           " all the syntax checking
-Plugin 'bling/vim-airline'              " airline for more info
-Plugin 'christoomey/vim-tmux-navigator' " Make vim and tmux play together
-Plugin 'ctrlpvim/ctrlp.vim'             " Ctrl-p for the file openings
+Plugin 'gmarik/vundle.vim'                  " vundle managing vundle for all the meta
+Plugin 'w0ng/vim-hybrid'                    " hybrid color scheme for the pretty
+Plugin 'scrooloose/syntastic'               " all the syntax checking
+Plugin 'bling/vim-airline'                  " airline for more info
+Plugin 'christoomey/vim-tmux-navigator'     " Make vim and tmux play together
+Plugin 'ctrlpvim/ctrlp.vim'                 " Ctrl-p for the file openings
+Plugin 'nathanaelkane/vim-indent-guides'    " This should help me view the indent levels
 
-call vundle#end()   				    " end vundle managed plugins
+call vundle#end()   				        " end vundle managed plugins
 
 " -----------------------------------------------------------------------
 " 02. Colors                                               *color_scheme*
@@ -66,20 +67,28 @@ set expandtab			" Tabs are now spaces pahhh
 set smarttab            " Smart tab handling for indenting
 set smartindent         " ^ See above
 
+" Vim Indent Guides, useful for python and stuff
+let g:indent_guides_auto_colors = 0                             " No Auto Color Detection
+let g:indent_guides_guide_size = 1                              " Thin guides
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd ctermbg=238  " Declare custom even line color
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=240 " Declare custom odd line color
+let g:indent_guides_enable_on_vim_startup = 1                   " Lets have this on by default, <leader>ig to disable
 
 " -----------------------------------------------------------------------
 " 04. UI Configuration                                        *ui_config*
 " -----------------------------------------------------------------------
-set number			" show line numbers
-set scrolloff=5     " keep 5 lines from the edge of the screen
-set cursorline      " horizontal line showing me where I am cause I am stupid
-set showcmd         " show the commands you are giving in the bottom right
-filetype indent on  " Filetype specific indenting
-set lazyredraw      " speed up the macros????
-set showmatch       " highlights matching pairs of: [{()}]
-set splitright      " vert splits open to the right
-set splitbelow      " horizontal splits open below
-set laststatus=2    " Make our airline visible always
+set number			                " show line numbers
+set scrolloff=5                     " keep 5 lines from the edge of the screen
+set cursorline                      " horizontal line showing me where I am cause I am stupid
+set showcmd                         " show the commands you are giving in the bottom right
+filetype indent on                  " Filetype specific indenting
+set lazyredraw                      " speed up the macros????
+set showmatch                       " highlights matching pairs of: [{()}]
+set splitright                      " vert splits open to the right
+set splitbelow                      " horizontal splits open below
+set laststatus=2                    " Make our airline visible always
+
+let g:airline_powerline_fonts = 0   " No Powerline font, till I get it working  
 
 " -----------------------------------------------------------------------
 " 05. Searching                                           *search_config*

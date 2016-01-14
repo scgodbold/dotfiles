@@ -183,7 +183,6 @@ bindsym $mod+Shift+space floating toggle
 bar {
     mode dock
     position top
-    status_command i3status
     font -*-anorexia-medium-*-*-*-11-*-*-*-*-*-*-*
     workspace_buttons yes
     colors {
@@ -194,12 +193,13 @@ bar {
         inactive_workspace #9a878f #191919
         urgent_workspace #2e3436 #9a878f
     }
+    status_command i3status
 }
 
 # ---------------------------------------------------------------------------------
 # 07. Startup Programs                                                 *i3_startup*
 # ---------------------------------------------------------------------------------
-exec --no-startup-id xrandr --output HDMI1 --auto --left-of VGA1
+exec xrandr --output HDMI1 --auto --left-of VGA1
 exec synergy
 
 # ---------------------------------------------------------------------------------
@@ -211,3 +211,4 @@ assign [class="google-chrome"] → 3
 
 # And this says to allow them to be floating
 for_window [class="google-chrome"] floating enabled
+for_window [class="synergy"] floating enabled
