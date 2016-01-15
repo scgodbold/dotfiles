@@ -46,6 +46,7 @@ Plugin 'bling/vim-airline'                  " airline for more info
 Plugin 'christoomey/vim-tmux-navigator'     " Make vim and tmux play together
 Plugin 'ctrlpvim/ctrlp.vim'                 " Ctrl-p for the file openings
 Plugin 'nathanaelkane/vim-indent-guides'    " This should help me view the indent levels
+Plugin 'tmhedberg/SimpylFold'               " Python folding is a bitch, lets see if this fixes it
 
 call vundle#end()   				        " end vundle managed plugins
 
@@ -111,6 +112,11 @@ set foldenable          " I want to fold
 set foldlevelstart=5    " Show most of the folds to begin with
 set foldlevel=99        " Gimme all dem folds
 set foldmethod=indent   " Fold on indent levels
+
+" SimpylFold for Python Folding, since Indent folding was less then ideal
+" These are required by SimpylFold
+autocmd BufWinEnter *.py setlocal foldexpr=SimplyFold(v:lnum) foldmethod=expr
+autocmd BufWinEnter *.py setlocal foldexpr< foldmethod<
 
 " Make folding and unfolding easier w/ space
 nnoremap <space> za

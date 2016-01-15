@@ -1,7 +1,11 @@
 buildFlask() {
   # Build the directories
   echo 'Creating directory structure'
-  mkdir -p app/{static/{img,css,js,font},templates}
+  mkdir -p app/static/img
+  mkdir -p app/static/js
+  mkdir -p app/static/css
+  mkdir -p app/static/font
+  mkdir -p app/templates
 
   # install flask
   echo 'Installing flask to your enviroment'
