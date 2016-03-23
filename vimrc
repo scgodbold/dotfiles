@@ -46,7 +46,7 @@ Plugin 'bling/vim-airline'                  " airline for more info
 Plugin 'christoomey/vim-tmux-navigator'     " Make vim and tmux play together
 Plugin 'ctrlpvim/ctrlp.vim'                 " Ctrl-p for the file openings
 Plugin 'nathanaelkane/vim-indent-guides'    " This should help me view the indent levels
-Plugin 'tmhedberg/SimpylFold'               " Python folding is a bitch, lets see if this fixes it
+Plugin 'tweekmonster/braceless.vim'         " Braceless vim for better python folding & movement
 
 call vundle#end()   				        " end vundle managed plugins
 
@@ -56,7 +56,11 @@ call vundle#end()   				        " end vundle managed plugins
 set background=dark		" All about the dark terminals
 set t_Co=256			" And 256 bit color schemes
 syntax enable			" Enable Syntax Highlighting
-colorscheme hybrid
+colorscheme hybrid      " our colorscheme definition
+
+" This sets opacity to match the terminal settings
+hi Normal ctermbg=none  
+hi NonText ctermbg=none
 
 " -----------------------------------------------------------------------
 " 03. Tabs & Spaces                                         *tabs_spaces*
@@ -75,6 +79,9 @@ autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd ctermbg=238  " Declare custom
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=240 " Declare custom odd line color
 let g:indent_guides_enable_on_vim_startup = 1                   " Lets have this on by default, <leader>ig to disable
 
+" Strip away trailing whitespace from python files
+autocmd BufWritePre *.py :%s/\s\+$//e
+
 " -----------------------------------------------------------------------
 " 04. UI Configuration                                        *ui_config*
 " -----------------------------------------------------------------------
@@ -83,7 +90,7 @@ set scrolloff=5                     " keep 5 lines from the edge of the screen
 set cursorline                      " horizontal line showing me where I am cause I am stupid
 set showcmd                         " show the commands you are giving in the bottom right
 filetype indent on                  " Filetype specific indenting
-set lazyredraw                      " speed up the macros????
+" set lazyredraw                      " speed up the macros????
 set showmatch                       " highlights matching pairs of: [{()}]
 set splitright                      " vert splits open to the right
 set splitbelow                      " horizontal splits open below
@@ -113,10 +120,8 @@ set foldlevelstart=5    " Show most of the folds to begin with
 set foldlevel=99        " Gimme all dem folds
 set foldmethod=indent   " Fold on indent levels
 
-" SimpylFold for Python Folding, since Indent folding was less then ideal
-" These are required by SimpylFold
-autocmd BufWinEnter *.py setlocal foldexpr=SimplyFold(v:lnum) foldmethod=expr
-autocmd BufWinEnter *.py setlocal foldexpr< foldmethod<
+" Braceless for maybe even better folding & indententing
+autocmd FileType python BracelessEnable +indent +fold
 
 " Make folding and unfolding easier w/ space
 nnoremap <space> za

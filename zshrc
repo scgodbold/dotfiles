@@ -31,30 +31,31 @@ fi
 # ------------------------------------------------------------------------------------
 # 02. Oh My ZSH Config                                                     *oh_my_zsh*
 # ------------------------------------------------------------------------------------
-ZSH=$HOME/.oh-my-zsh                                    # Change our zsh Path to OMZSH
-ZSH_THEME="nicoulaj"                                    # Set our theme
-plugins=(git last-working-dir pip sudo python vi-mode)  # And dont forget the plugins
-bindkey -v                                              # Vim Mode, cause this is a vim shop
-source $ZSH/oh-my-zsh.sh                                # source that isssh
+ZSH=$HOME/.oh-my-zsh                                            # Change our zsh Path to OMZSH
+ZSH_THEME="nicoulaj"                                            # Set our theme
+plugins=(git last-working-dir pip sudo python vi-mode history)  # And dont forget the plugins
+bindkey -v                                                      # Vim Mode, cause this is a vim shop
+source $ZSH/oh-my-zsh.sh                                        # source that isssh
 
 
 # ------------------------------------------------------------------------------------
 # 03. Custom Aliases                                                  *custom_aliases*
 # ------------------------------------------------------------------------------------
 # misc, but important things, save all the key strokes
-alias v='vim'
-alias q='exit'
+alias v='vim'                                               # v for vim, no more 3 letter editing
+alias q='exit'                                              # q for exit, so that way I can close things faster
 
 # Git things
-alias gs='git status -s'
+alias gs='git status -s'                                    # gs runs git status in short mode
 
 # tmux things
-alias ts='tmux new -s'
-alias ta='tmux attach -t'
-alias td='tmux detach-client'
+alias ts='tmux new -s'                                      # Create a new tmux session
+alias ta='tmux attach -t'                                   # attach to the given tmux session
+alias td='tmux detach-client'                               # detach from tmux client
 
 # My custom scripts
-alias flaskify='~/repos/dotfiles/scripts/flask_strap.sh'
+alias flaskify='~/repos/dotfiles/scripts/flask_strap.sh'    # Flaskify, custom script that flask straps a folder
+bindkey '^R' history-incremental-search-backward            # Vim mode disables reverse search, fix that
 
 # ------------------------------------------------------------------------------------
 # 04. Python Virtualenv                                                       *py_env*
