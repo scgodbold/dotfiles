@@ -1,5 +1,5 @@
 # ZSHRC for Scott Godbold
-# Last Updated: January 11, 2016
+# Last Updated: May 4, 2016
 # Installation Requirements:
 #   tmux                (however you wish to get it)
 #   virtualenv          (pip)
@@ -20,6 +20,7 @@
 #   03. Custom Aliases .............................................. |custom_aliases|
 #   04. Python Virtualenv ................................................... |py_env|
 #   05. Enviroment Variables .............................................. |env_vars|
+#   06. Custom Functions .............................................. |custom_funcs|
 
 # ------------------------------------------------------------------------------------
 # 01. Tmux                                                                  *set_tmux*
@@ -73,3 +74,19 @@ export PATH=$PATH:/opt/local/bin:/opt/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/
 
 export EDITOR='vim'     # Is there any other editor really?
 export HISTSIZE=10000   # All the history, so I can look back to the dawn of time (but not really)
+# ------------------------------------------------------------------------------------
+# 06. Custom Functions                                                  *custom_funcs*
+# ------------------------------------------------------------------------------------
+# This makes a function that if there is a job lauch it
+fancy-ctrl-z () {
+    if [[ $#BUFFER -eq 0 ]]; then
+        BUFFER='fg'
+        zle accept-line
+    else
+        zle push-input
+        zle clear-screen
+    fi
+}
+
+zle -N fancy-ctrl-z         # Bind the job with zsh
+bindkey '^z' fancy-ctrl-z   # use ctrl-z to run it, great for use w/ vim

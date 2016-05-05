@@ -1,5 +1,5 @@
 " Vimrc for Scott Godbold's work enviroment
-" Last Update: January 11, 2016
+" Last Update: May 5, 2016
 " Installation Requirements:
 "   flake8  (Through pip)
 "   pylint  (Through pip)
@@ -11,6 +11,11 @@
 "       |- .backup
 "       |- .undo
 "       |- .swap
+"
+" Important Notes:
+"   Make sure all bindings involving <leader> go in the Leader Bindings section
+"   Failure to do so will mean the binding will not work as it will be before
+"   the leader was even declared
 
 " -----------------------------------------------------------------------
 
@@ -22,8 +27,8 @@
 "   04. UI Configuration .................................... |ui_config|
 "   05. Searching ....................................... |search_config|
 "   06. Folding ........................................ |folding_config|
-"   07. Movement ...................................... |movement_config|
-"   08. Leader Bindings ............................... |leader_bindings|
+"   07. Key Bindings ........................................ |key_binds|
+"   08. Leader Bindings .................................. |leader_binds|
 "   09. Custom Functions ................................. |custom_funcs|
 "   10. Autogroups ................................... |autogroup_config|
 "   11. Syntastic Settings ........................... |syntastic_config|
@@ -42,7 +47,7 @@ call vundle#rc()    				        " required by vundle
 Plugin 'gmarik/vundle.vim'                  " vundle managing vundle for all the meta
 Plugin 'w0ng/vim-hybrid'                    " hybrid color scheme for the pretty
 Plugin 'scrooloose/syntastic'               " all the syntax checking
-Plugin 'bling/vim-airline'                  " airline for more info
+Plugin 'itchyny/lightline.vim'              " A lighter status line than airline
 Plugin 'christoomey/vim-tmux-navigator'     " Make vim and tmux play together
 Plugin 'ctrlpvim/ctrlp.vim'                 " Ctrl-p for the file openings
 Plugin 'nathanaelkane/vim-indent-guides'    " This should help me view the indent levels
@@ -61,6 +66,11 @@ colorscheme hybrid      " our colorscheme definition
 " This sets opacity to match the terminal settings
 hi Normal ctermbg=none  
 hi NonText ctermbg=none
+
+" Set lightline colorscheme
+let g:lightline = {
+            \ 'colorscheme': 'wombat',
+            \ }
 
 " -----------------------------------------------------------------------
 " 03. Tabs & Spaces                                         *tabs_spaces*
@@ -94,23 +104,32 @@ filetype indent on                  " Filetype specific indenting
 set showmatch                       " highlights matching pairs of: [{()}]
 set splitright                      " vert splits open to the right
 set splitbelow                      " horizontal splits open below
-set laststatus=2                    " Make our airline visible always
+set laststatus=2                    " Make our lightline visible always
 
 let g:airline_powerline_fonts = 0   " No Powerline font, till I get it working  
 
 " -----------------------------------------------------------------------
 " 05. Searching                                           *search_config*
 " -----------------------------------------------------------------------
-set incsearch       " search as characters get entered
-set hlsearch        " highlight matches
-set ignorecase      " case insensitive searching
-set smartcase       " unless we want case
+set incsearch                       " search as characters get entered
+set hlsearch                        " highlight matches
+set ignorecase                      " case insensitive searching
+set smartcase                       " unless we want case
 
-" Unhighlight the bits if we be done
-nnoremap <leader><space> :nohlsearch<CR>
+" Ctrl-p settings
+set wildignore+=*.pyc,.git/*,*.swp  " Custom ignore files
+let g:ctrlp_use_caching=0           " Disable caching
 
-" Ctrl-p custom ignore files
-set wildignore+=*.pyc,.git/*,*.swp
+" Ignore files in gitignore and use silver searcher if able
+if executable('ag')
+    set grepprg=ag\ --nogroup\ --nocolor
+    let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+else
+    let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
+    let g:ctrlp_prompt_mappings = {
+        \ 'AcceptSelection("e")': ['<space>', '<cr>'],
+    \ }
+endif
 
 " -----------------------------------------------------------------------
 " 06. Folding                                            *folding_config*
@@ -123,11 +142,9 @@ set foldmethod=indent   " Fold on indent levels
 " Braceless for maybe even better folding & indententing
 autocmd FileType python BracelessEnable +indent +fold
 
-" Make folding and unfolding easier w/ space
-nnoremap <space> za
 
 " -----------------------------------------------------------------------
-" 07. Movement                                          *movement_config*
+" 07. Key Bindings                                            *key_binds*
 " -----------------------------------------------------------------------
 " move visually vertically not by line
 nnoremap j gj
@@ -144,21 +161,20 @@ nnoremap ^ <nop>
 " Highlight last inserted text
 nnoremap gV `[v`]
 
-" -----------------------------------------------------------------------
-" 08. Leader Bindings                                   *leader_bindings*
-" -----------------------------------------------------------------------
-let mapleader=','
-
 " And jk/kj escapes insert mode
 inoremap jk <esc>
 inoremap kj <esc>
 
+" remaping : to ; and save all the keystrokes
+nnoremap ; :
+
 " Break that habbit right meow
 inoremap <esc> <nop>
 
-
-" remaping : to ; and save all the keystrokes
-nnoremap ; :
+" -----------------------------------------------------------------------
+" 08. Leader Bindings                                      *leader_binds*
+" -----------------------------------------------------------------------
+let mapleader=' '
 
 " Edit the vimrc, and zshrc from anywhere, also source em
 nnoremap <leader>ev :vsp $MYVIMRC<CR>
@@ -168,6 +184,15 @@ nnoremap <leader>sv :source $MYVIMRC<CR>
 " Allow for <leader>\ and <leader>- to open vimsplits
 nnoremap <leader>\ :vsplit<CR>
 nnoremap <leader>- :split<CR>
+
+" Unhighlight the bits if we be done
+nnoremap <leader>c :nohlsearch<CR>
+
+" Make folding and unfolding easier w/ space
+nnoremap <leader>f za
+
+" rebind control p keybings
+nnoremap <leader>o :CtrlP<CR>
 
 " -----------------------------------------------------------------------
 " 09. Custom Functions                                     *custom_funcs*
@@ -181,9 +206,24 @@ function! ToggleNumber()
         set relativenumber
     endif
 endfunc
-
 " Give that a key binding (Tab twice)
 nnoremap <tab><tab> :call ToggleNumber()<CR>
+
+" zoom in on a specific window, then zoom back out
+function! s:ZoomToggle() abort
+    if exists('t:zoomed') && t:zoomed
+        execute t:zoom_winrestcmd
+        let t:zoomed=0
+    else
+        let t:zoom_winrestcmd = winrestcmd()
+        resize
+        vertical resize
+        let t:zoomed=1
+    endif
+endfunction
+command! ZoomToggle call s:ZoomToggle()
+" bind it to <leader><leader>
+nnoremap <silent> <leader><leader> :ZoomToggle<CR>
 
 " -----------------------------------------------------------------------
 " 10. Autogroups                                       *autogroup_config*
