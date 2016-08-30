@@ -1,5 +1,5 @@
 " Vimrc for Scott Godbold's work enviroment
-" Last Update: May 5, 2016
+" Last Update: August 30, 2016
 " Installation Requirements:
 "   flake8  (Through pip)
 "   pylint  (Through pip)
@@ -106,8 +106,6 @@ set splitright                      " vert splits open to the right
 set splitbelow                      " horizontal splits open below
 set laststatus=2                    " Make our lightline visible always
 
-let g:airline_powerline_fonts = 0   " No Powerline font, till I get it working  
-
 " -----------------------------------------------------------------------
 " 05. Searching                                           *search_config*
 " -----------------------------------------------------------------------
@@ -171,6 +169,7 @@ nnoremap ; :
 " Break that habbit right meow
 inoremap <esc> <nop>
 
+
 " -----------------------------------------------------------------------
 " 08. Leader Bindings                                      *leader_binds*
 " -----------------------------------------------------------------------
@@ -193,6 +192,9 @@ nnoremap <leader>f za
 
 " rebind control p keybings
 nnoremap <leader>o :CtrlP<CR>
+
+" I want a redraw keybinding
+nnoremap <leader>r :redraw!<CR>
 
 " -----------------------------------------------------------------------
 " 09. Custom Functions                                     *custom_funcs*
