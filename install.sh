@@ -113,6 +113,17 @@ main() {
   link "postmkvirtualenv" ".virtualenvs/postmkvirtualenv"
   link "flake8" ".config/flake8"
   link "i3config" ".i3/config"
+
+  # Install vim plugins
+  vim +PluginInstall +qall
+
+  # Change default shell to zsh
+  chsh -s $(which zsh) $USER
+  if [ $? -ne 0 ]; then
+    echo
+    echo '[Error] - current user is not allowed to change default shell, may require root intervention'
+    echo
+  fi
 }
 
 main
