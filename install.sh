@@ -75,8 +75,6 @@ main() {
   required_reqs
   optional_reqs
 
-  echo 'This is where I stop'
-  exit 0
   # Check and make sure that I haven't already installed the dotfiles
   if [ -d "$DOTFILE_HOME" ]; then
     echo '[Warn] - Dotfiles have already been cloned down skipping the cloning process'
