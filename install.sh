@@ -58,7 +58,7 @@ link() {
     else
       echo "[Warning] - File $HOME/$2 exists, moving it to backup dir"
       # Create backup directory if its needed
-      if [ -d "$BACKUP_DIR" ]; then
+      if [ ! -d "$BACKUP_DIR" ]; then
         mkdir $BACKUP_DIR
       fi
       mv $HOME/$2 $BACKUP_DIR/
@@ -75,6 +75,8 @@ main() {
   required_reqs
   optional_reqs
 
+  echo 'This is where I stop'
+  exit 0
   # Check and make sure that I haven't already installed the dotfiles
   if [ -d "$DOTFILE_HOME" ]; then
     echo '[Warn] - Dotfiles have already been cloned down skipping the cloning process'
@@ -96,6 +98,8 @@ main() {
   mkdir $HOME/.vim/.swap
   mkdir $HOME/.vim/bundle
   mkdir $HOME/.virtualenvs
+  mkdir $HOME/.i3
+  mkdir $HOME/.config
 
   # Install Vundle
   git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
