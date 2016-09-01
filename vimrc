@@ -1,5 +1,5 @@
 " Vimrc for Scott Godbold's work enviroment
-" Last Update: August 30, 2016
+" Last Update: September 1, 2016
 " Installation Requirements:
 "   flake8  (Through pip)
 "   pylint  (Through pip)
@@ -45,7 +45,8 @@ set rtp+=~/.vim/bundle/Vundle.vim/	        " add vundle to run time path
 call vundle#rc()    				        " required by vundle
 
 Plugin 'gmarik/vundle.vim'                  " vundle managing vundle for all the meta
-Plugin 'w0ng/vim-hybrid'                    " hybrid color scheme for the pretty
+" Plugin 'w0ng/vim-hybrid'                  " My fallback colorscheme, always a good choice
+Plugin 'alessandroyorba/sierra'             " Sierra colors, the new hotness
 Plugin 'scrooloose/syntastic'               " all the syntax checking
 Plugin 'itchyny/lightline.vim'              " A lighter status line than airline
 Plugin 'christoomey/vim-tmux-navigator'     " Make vim and tmux play together
@@ -58,10 +59,10 @@ call vundle#end()   				        " end vundle managed plugins
 " -----------------------------------------------------------------------
 " 02. Colors                                               *color_scheme*
 " -----------------------------------------------------------------------
-set background=dark		" All about the dark terminals
-set t_Co=256			" And 256 bit color schemes
-syntax enable			" Enable Syntax Highlighting
-colorscheme hybrid      " our colorscheme definition
+set background=dark		                " All about the dark terminals
+set t_Co=256			                " And 256 bit color schemes
+syntax enable			                " Enable Syntax Highlighting
+colorscheme sierra                      " our colorscheme definition
 
 " This sets opacity to match the terminal settings
 hi Normal ctermbg=none  

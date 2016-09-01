@@ -1,5 +1,5 @@
 # ZSHRC for Scott Godbold
-# Last Updated: May 4, 2016
+# Last Updated: September 1, 2016
 # Installation Requirements:
 #   tmux                (however you wish to get it)
 #   virtualenv          (pip)
@@ -55,7 +55,6 @@ alias ta='tmux attach -t'                                   # attach to the give
 alias td='tmux detach-client'                               # detach from tmux client
 
 # My custom scripts
-alias flaskify='~/repos/dotfiles/scripts/flask_strap.sh'    # Flaskify, custom script that flask straps a folder
 bindkey '^R' history-incremental-search-backward            # Vim mode disables reverse search, fix that
 
 # ------------------------------------------------------------------------------------
