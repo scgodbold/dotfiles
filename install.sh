@@ -113,4 +113,4 @@ main() {
   link "i3config" ".i3/config"
 }
 
-required_reqs
+main
