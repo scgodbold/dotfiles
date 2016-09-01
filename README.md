@@ -1,6 +1,3 @@
-## TODO
-1. Write the rest of the README
-
 ## Installation
 
 ```
