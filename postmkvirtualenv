@@ -7,18 +7,10 @@ mkdir $HOME/repos/py/$proj_name
 cd $HOME/repos/py/$proj_name
 curl https://raw.githubusercontent.com/github/gitignore/master/Python.gitignore -o .gitignore
 echo "\n# Ignore Vim swap files\n*.swp" >> .gitignore
+echo "\n\n#Secrets are best untold\nsecret.py" >> .gitignore
 touch README
 
 # Set up git repository
 git init
 git config user.name "Scott Godbold"
-echo -n "Is this a zappos project? [y/n]: "
-read answer
-case "$answer" in
-    Y|y|yes|Yes)
-        git config user.email "sgodbold@zappos.com"
-        ;;
-    N|n|no|No)
-        git config user.email "scgodbold@gmail.com"
-        ;;
-esac
+git config user.email "scgodbold@gmail.com"
