@@ -1,5 +1,5 @@
 " Vimrc for Scott Godbold's work enviroment
-" Last Update: September 1, 2016
+" Last Update: September 14, 2016
 " Installation Requirements:
 "   flake8  (Through pip)
 "   pylint  (Through pip)
@@ -249,11 +249,23 @@ set statusline+=%*                              " Syntastic Recommended
 
 let g:syntastic_always_populate_loc_list = 1    " Syntastic Recommended
 let g:syntastic_auto_loc_list = 1               " Syntastic Recommended
-let g:syntastic_check_on_open = 1               " Syntastic Recommended
+let g:syntastic_check_on_open = 0               " Syntastic Recommended
 let g:syntastic_check_on_wq = 0                 " Syntastic Recommended
+let g:syntastic_mode_map = { 'mode': 'passive'}  " Enable syntastic mode, going to be used for toggling
 
 " Get ride of some annoying python errors I dont like/arent working (import errors, no-members) I am looking at you
 let g:syntastic_python_pylint_quiet_messages = {'level': ['warning'], 'regex': ['import-error', 'no-member']}
+
+" Give us the option to hide and show syntastic
+function! ToggleSyntastic()
+    if(g:syntastic_mode_map['mode'] == 'active')
+        call SyntasticToggleMode()
+    else
+        call SyntasticToggleMode()
+        call SyntasticCheck()
+    endif
+endfunction
+nnoremap <leader>h :call ToggleSyntastic()<CR>
 
 " -----------------------------------------------------------------------
 " 12. Backups & Undos                                     *backups_undos*
