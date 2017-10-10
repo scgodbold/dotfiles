@@ -167,9 +167,6 @@ inoremap kj <esc>
 " remaping : to ; and save all the keystrokes
 nnoremap ; :
 
-" Break that habbit right meow
-inoremap <esc> <nop>
-
 
 " -----------------------------------------------------------------------
 " 08. Leader Bindings                                      *leader_binds*
