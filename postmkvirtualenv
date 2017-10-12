@@ -1,11 +1,11 @@
 #!/bin/zsh
 # This hook is run after a new virtualenv is activated.
 proj_name=$(echo $VIRTUAL_ENV|awk -F'/' '{print $NF}')
-if [[ ! -d ${HOME}/repos/py/$projname ]]; then
-    mkdir $HOME/repos/py/$proj_name
+if [[ ! -d ${HOME}/repos/py/${proj_name} ]]; then
+    mkdir ${HOME}/repos/py/${proj_name}
 
     # Move to directory to set up the project
-    cd $HOME/repos/py/$proj_name
+    cd ${HOME}/repos/py/${proj_name}
     curl https://raw.githubusercontent.com/github/gitignore/master/Python.gitignore -o .gitignore
     echo "\n# Ignore Vim swap files\n*.swp" >> .gitignore
     echo "\n\n#Secrets are best untold\nsecret.py" >> .gitignore

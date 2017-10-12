@@ -82,6 +82,7 @@ set shiftwidth=4		" Sets spaces shifted when using [<<] or [>>]
 set expandtab			" Tabs are now spaces pahhh
 set smarttab            " Smart tab handling for indenting
 set smartindent         " ^ See above
+set backspace=2         " Apparently this is needed for deleting new lines
 
 " Vim Indent Guides, useful for python and stuff
 let g:indent_guides_auto_colors = 0                             " No Auto Color Detection
