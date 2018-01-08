@@ -1,15 +1,7 @@
-" Vimrc for Scott Godbold's work enviroment
-" Last Update: January 6, 2018
-" Installation Requirements:
-"   flake8  (Through pip)
-"   pylint  (Through pip)
-"   tmux    (Through however you like)
-" Also make sure the following directories exist
-"   ~/.vim
-"       |
-"       |- .backup
-"       |- .undo
-"       |- .swap
+" Config for vim
+"
+" Author: Scott Godbold
+" Last Update: January 7, 2018
 "
 " Important Notes:
 "   Make sure all bindings involving <leader> go in the Leader Bindings section
@@ -18,9 +10,10 @@
 
 " Changelog:
 "
-"   2018.1.8
+"   2018.1.7
 "       * Switched to vimplug from vundle
 "       * Autocreate directories on start that are required by vim
+"       * Remove jk/kj hot mappings, caused issues
 "               
 
 " -----------------------------------------------------------------------
@@ -169,10 +162,6 @@ nnoremap ^ <nop>
 
 " Highlight last inserted text
 nnoremap gV `[v`]
-
-" And jk/kj escapes insert mode
-inoremap jk <esc>
-inoremap kj <esc>
 
 " remaping : to ; and save all the keystrokes
 nnoremap ; :
