@@ -1,0 +1,13 @@
+# Python Virtualenviornment config for zsh
+# 
+# Author: Scott Godbold
+# Last Updated: January 7, 2018
+
+# Changelog:
+#
+# 2018.1.7
+#   * Created Python Module
+
+export WORKON_HOME=$HOME/.virtualenvs                   # Where all the virtualenvs will go
+export VIRTUALENVWRAPPER_HOOK_DIR=$HOME/.virtualenvs    # Where virtualenv hooks are located
+source /usr/bin/virtualenvwrapper.sh                    # source the wrapper for easy mode

@@ -1,0 +1,6 @@
+[yadm]
+	auto-alt = true
+    auto-perms = true
+	ssh-perms = true
+	gpg-perms = true
+    gpg-program = gpg2

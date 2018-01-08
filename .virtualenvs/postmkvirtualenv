@@ -1,4 +1,7 @@
 #!/bin/zsh
+
+set -x
+
 # This hook is run after a new virtualenv is activated.
 proj_name=$(echo $VIRTUAL_ENV|awk -F'/' '{print $NF}')
 if [[ ! -d ${HOME}/repos/py/${proj_name} ]]; then

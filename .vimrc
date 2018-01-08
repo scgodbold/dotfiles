@@ -1,21 +1,20 @@
-" Vimrc for Scott Godbold's work enviroment
-" Last Update: September 14, 2016
-" Installation Requirements:
-"   flake8  (Through pip)
-"   pylint  (Through pip)
-"   tmux    (Through however you like)
-"   vundle  (https://github.com/VundleVim/Vundle.vim)
-" Also make sure the following directories exist
-"   ~/.vim
-"       |
-"       |- .backup
-"       |- .undo
-"       |- .swap
+" Config for vim
+"
+" Author: Scott Godbold
+" Last Update: January 7, 2018
 "
 " Important Notes:
 "   Make sure all bindings involving <leader> go in the Leader Bindings section
 "   Failure to do so will mean the binding will not work as it will be before
 "   the leader was even declared
+
+" Changelog:
+"
+"   2018.1.7
+"       * Switched to vimplug from vundle
+"       * Autocreate directories on start that are required by vim
+"       * Remove jk/kj hot mappings, caused issues
+"               
 
 " -----------------------------------------------------------------------
 
@@ -39,22 +38,25 @@
 " 01. Plugin Settings                                     *plugin_config*
 " -----------------------------------------------------------------------
 set nocompatible				            " Make this thing uncompatiable with vi because this is vim goddamnit
-filetype off					            " required by vundle
 
-set rtp+=~/.vim/bundle/Vundle.vim/	        " add vundle to run time path
-call vundle#rc()    				        " required by vundle
+" download vim-plug if missing
+if empty(glob("~/.vim/autoload/plug.vim"))
+    silent! execute '!curl --create-dirs -fsSLo ~/.vim/autoload/plug.vim https://raw.github.com/junegunn/vim-plug/master/plug.vim'
+    autocmd VimEnter * silent! PlugInstall
+endif
 
-Plugin 'gmarik/vundle.vim'                  " vundle managing vundle for all the meta
-" Plugin 'w0ng/vim-hybrid'                  " My fallback colorscheme, always a good choice
-Plugin 'alessandroyorba/sierra'             " Sierra colors, the new hotness
-Plugin 'scrooloose/syntastic'               " all the syntax checking
-Plugin 'itchyny/lightline.vim'              " A lighter status line than airline
-Plugin 'christoomey/vim-tmux-navigator'     " Make vim and tmux play together
-Plugin 'ctrlpvim/ctrlp.vim'                 " Ctrl-p for the file openings
-Plugin 'nathanaelkane/vim-indent-guides'    " This should help me view the indent levels
-Plugin 'tweekmonster/braceless.vim'         " Braceless vim for better python folding & movement
+call plug#begin('~/.vim/plugged')    		" Define plugins
 
-call vundle#end()   				        " end vundle managed plugins
+" Plug 'w0ng/vim-hybrid'                    " My fallback colorscheme, always a good choice
+Plug 'alessandroyorba/sierra'               " Sierra colors, the new hotness
+Plug 'scrooloose/syntastic'                 " all the syntax checking
+Plug 'itchyny/lightline.vim'                " A lighter status line than airline
+Plug 'christoomey/vim-tmux-navigator'       " Make vim and tmux play together
+Plug 'ctrlpvim/ctrlp.vim'                   " Ctrl-p for the file openings
+Plug 'nathanaelkane/vim-indent-guides'      " This should help me view the indent levels
+Plug 'tweekmonster/braceless.vim'           " Braceless vim for better python folding & movement
+
+call plug#end()   				            " end vundle managed plugins
 
 " -----------------------------------------------------------------------
 " 02. Colors                                               *color_scheme*
@@ -102,7 +104,7 @@ set scrolloff=5                     " keep 5 lines from the edge of the screen
 set cursorline                      " horizontal line showing me where I am cause I am stupid
 set showcmd                         " show the commands you are giving in the bottom right
 filetype indent on                  " Filetype specific indenting
-" set lazyredraw                      " speed up the macros????
+set lazyredraw                      " speed up the macros????
 set showmatch                       " highlights matching pairs of: [{()}]
 set splitright                      " vert splits open to the right
 set splitbelow                      " horizontal splits open below
@@ -160,10 +162,6 @@ nnoremap ^ <nop>
 
 " Highlight last inserted text
 nnoremap gV `[v`]
-
-" And jk/kj escapes insert mode
-inoremap jk <esc>
-inoremap kj <esc>
 
 " remaping : to ; and save all the keystrokes
 nnoremap ; :
@@ -268,9 +266,23 @@ nnoremap <leader>h :call ToggleSyntastic()<CR>
 " -----------------------------------------------------------------------
 " 12. Backups & Undos                                     *backups_undos*
 " -----------------------------------------------------------------------
-set backupdir=~/.vim/.backup//  " We backup here now, instead if in dir
-set undodir=~/.vim/.undo//      " And undo to here
-set directory=~/.vim/.swap//     " This does things for swap files
+" Set the backup directory and ensure that it exists
+if !isdirectory($HOME . "/.vim/.backup")
+    call mkdir($HOME . "/.vim/.backup", "p")
+endif
+set backupdir=~/.vim/.backup//
+
+" Set the undo directory and ensure that it exists
+if !isdirectory($HOME . "/.vim/.undo")
+    call mkdir($HOME . "/.vim/.undo", "p")
+endif
+set undodir=~/.vim/.undo//
+
+" Set the swap directory and ensure that it exists
+if !isdirectory($HOME . "/.vim/.swap")
+    call mkdir($HOME . "/.vim/.swap", "p")
+endif
+set directory=~/.vim/.swap//
 
 
 set undofile                " persistent undo == $$$$
