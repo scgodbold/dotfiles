@@ -23,11 +23,10 @@ time
 vi_mode
 venv
 git_branch
-line_sep
 dir
+line_sep
 char
 )
-
 SPACESHIP_PROMPT_DEFAULT_PREFIX=" "
 SPACESHIP_TIME_SHOW=true
 SPACESHIP_TIME_COLOR=black

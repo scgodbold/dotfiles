@@ -1,0 +1,96 @@
+#! /bin/bash
+AUR_DIR="${HOME}/aur"
+REPO_DIR="${HOME}/repos"
+
+declare -a REQUIRED_PKGS=(
+    "vim"
+    "neovim"
+    "git"
+    "tmux"
+    "zsh"
+    "the_silver_searcher"
+    "python-virtualenv"
+    "python-virtualenvwrapper"
+    "python-pip"
+)
+
+declare -a AUR_PKGS=(
+    "alacritty-git"
+)
+
+declare -a PIP_PKGS=(
+    "envtpl"
+    "ipython"
+    "flake8"
+    "pylint"
+)
+
+function install_cower() {
+    if [ ! $(command -v cower) ]; then
+        gpg --recv-keys --keyserver hkp://pgp.mit.edu 1EB2638FF56C0C53
+
+        # Build cower
+        mkdir -p ${AUR_DIR}
+        git clone https://aur.archlinux.org/cower.git ${AUR_DIR}/cower
+        makepkg -si --noconfirm ${AUR_DIR}/cower/PKGBUILD
+    fi
+}
+
+function install_ohmyzsh() {
+    if [ ! -d "${HOME}/.oh-my-zsh" ]; then
+        sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+    fi
+    
+    # Install spaceship theme for ohmyzsh
+    curl -o - https://raw.githubusercontent.com/denysdovhan/spaceship-zsh-theme/master/install.zsh | zsh
+}
+
+function install_pkgs() {
+    # Install all pacman packages
+    for pkg in ${REQUIRED_PKGS[@]}; do
+        sudo pacman -S --needed --noconfirm "${pkg}"
+    done
+
+    # Install aur packages
+    for pkg in ${AUR_PKGS[@]}; do
+        if [[ ! $(cower -i ${pkg} | grep "installed") ]]; then
+            /usr/bin/cower -d "pkg"
+            makepkg -si --noconfirm "${AUR_DIR}/${pkg}/PKGBUILD"
+        fi
+    done
+}
+
+function install_pip_pkgs() {
+    for pkg in ${PIP_PKGS[@]}; do
+        if [ ! $(pip freeze | grep ${pkg}) ]; then
+            sudo pip install ${pkg}
+        fi
+    done
+}
+
+function bootstrap_vim() {
+    # Bootstrap vim plugins
+    if command -v vim >/dev/null 2>&1; then
+        echo "Bootstraping Vim"
+        vim '+PlugUpdate' '+PlugClean!' '+PlugUpdate' '+qall'
+    fi
+}
+
+function build_directories() {
+    mkdir -p ${AUR_DIR}
+    mkdir -p ${REPO_DIR}/py
+}
+
+function main(){
+    build_directories
+    install_cower
+    install_pkgs
+    install_ohmyzsh
+    install_pip_pkgs
+    bootstrap_vim
+
+    # Run the yadm alt program once envtpl is installed to complete the installation
+    yadm alt
+}
+
+main
