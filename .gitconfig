@@ -3,3 +3,6 @@
 	email = scgodbold@gmail.com
 [push]
     default = current
+[alias]
+    squash = "!f() { git rebase -i HEAD~$1; }; f"
+    squashc = "!f() { git rebase -i $1; }; f"
