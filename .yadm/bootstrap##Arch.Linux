@@ -44,9 +44,10 @@ function install_ohmyzsh() {
     fi
     
     # Install spaceship theme for ohmyzsh
-    spaceship_path="${OMZSH_DIR}/custom/themes/spaceship.zsh-theme"
-    if [ ! -e "${spaceship_path}" ]; then
-        curl -o "${spaceship_path}" "https://raw.githubusercontent.com/denysdovhan/spaceship-zsh-theme/master/spaceship.zsh"
+    spaceship_path="${OMZSH_DIR}/custom/themes"
+    if [ ! -e "${spaceship_path}/spaceship.zsh-theme" ]; then
+        mkdir -p "${spaceship_path}"
+        curl -o "${spaceship_path}/spaceship.zsh-theme" "https://raw.githubusercontent.com/denysdovhan/spaceship-zsh-theme/master/spaceship.zsh"
     fi
 }
 
