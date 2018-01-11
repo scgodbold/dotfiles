@@ -64,7 +64,7 @@ call plug#end()   				            " end vundle managed plugins
 set background=dark		                " All about the dark terminals
 set t_Co=256			                " And 256 bit color schemes
 syntax enable			                " Enable Syntax Highlighting
-colorscheme sierra                      " our colorscheme definition
+silent! colorscheme sierra              " our colorscheme definition
 
 " This sets opacity to match the terminal settings
 hi Normal ctermbg=none  
