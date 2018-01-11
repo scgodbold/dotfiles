@@ -10,5 +10,5 @@
 
 export WORKON_HOME=$HOME/.virtualenvs                       # Where all the virtualenvs will go
 export VIRTUALENVWRAPPER_HOOK_DIR=$HOME/.virtualenvs        # Where virtualenv hooks are located
-export VIRTUALENVWRAPPER_PYTHON=/usr/bin/local/bin/python3  # This should be python installed by brew
+export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3      # This should be python installed by brew
 source /usr/local/bin/virtualenvwrapper.sh                  # source the wrapper for easy mode
