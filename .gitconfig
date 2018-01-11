@@ -1,0 +1,5 @@
+[user]
+	name = Scott Godbold
+	email = scgodbold@gmail.com
+[push]
+    default = current
