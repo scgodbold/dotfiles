@@ -1,0 +1,74 @@
+#! /bin/bash
+REPO_DIR="${HOME}/repos"
+OMZSH_DIR="${HOME}/.oh-my-zsh"
+
+BREW_PKGS=(
+    "neovim"
+    "python"
+    "python3"
+    "the_silver_searcher"
+    "tmux"
+    "yadm"
+    "zsh"
+)
+
+PIP_PKGS=(
+    "envtpl"
+    "ipython"
+    "flake8"
+    "pylint"
+    "virtualenv"
+    "virtualenvwrapper"
+)
+
+function install_brew() {
+    # This will likely never be executed as brew is going to be used to install yadm but just in case
+    if [ ! $(command -v brew) ]; then
+        /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    fi
+    if [ ! $(brew tap | grep "caskroom/cask") ]; then
+        brew tap caskroom/cask
+    fi
+}
+
+function install_ohmyzsh() {
+    if [ ! -d "${OMZSH_DIR}" ]; then
+        sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+    fi
+    
+    # Install spaceship theme for ohmyzsh
+    spaceship_path="${OMZSH_DIR}/custom/themes/spaceship.zsh-theme"
+    if [ ! -e "${spaceship_path}" ]; then
+        curl -o "${spaceship_path}" "https://raw.githubusercontent.com/denysdovhan/spaceship-zsh-theme/master/spaceship.zsh"
+    fi
+}
+
+function install_pkgs() {
+    # Install brew packages and link them
+    brew install $(printf " %s" "${BREW_PKGS[@]}")
+    brew link python python3  # These are not linked by default and we want this
+
+    sudo pip install $(printf " %s" "${PIP_PKGS[@]}")
+}
+
+function bootstrap_vim() {
+    # Bootstrap vim plugins
+    if command -v nvim >/dev/null 2>&1; then
+        echo "Bootstraping Vim"
+        nvim '+PlugUpdate' '+PlugClean!' '+PlugUpdate' '+qall'
+    fi
+}
+
+function build_directories() {
+    mkdir -p ${REPO_DIR}/py
+}
+
+function main(){
+    install_brew
+    install_pkgs
+    install_ohmyzsh
+    bootstrap_vim
+    build_directories
+}
+
+main
