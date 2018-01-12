@@ -53,6 +53,17 @@ function install_pkgs() {
     sudo /usr/local/bin/pip3 install $(printf " %s" "${PIP_PKGS[@]}")
 }
 
+function install_alacritty() {
+    curl https://sh.rustup.rs -sSf | sh -s -- -y
+    git clone https://github.com/jwilm/alacritty.git "${REPO_DIR}/alacritty"
+    cd "${REPO_DIR}/alacritty"
+    ${HOME}/.cargo/bin/rustup override set stable
+    ${HOME}/.cargo/bin/rustup update stable
+    ${HOME}/.cargo/bin/cargo build --release
+    make app
+    cp -r target/release/osx/Alacritty.app /Applications/
+}
+
 function bootstrap_vim() {
     # Bootstrap vim plugins
     if command -v nvim >/dev/null 2>&1; then
@@ -69,6 +80,7 @@ function main(){
     install_brew
     install_pkgs
     install_ohmyzsh
+    install_alacritty
     bootstrap_vim
     build_directories
 }
