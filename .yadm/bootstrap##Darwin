@@ -1,0 +1,90 @@
+#! /bin/bash
+REPO_DIR="${HOME}/repos"
+OMZSH_DIR="${HOME}/.oh-my-zsh"
+
+BREW_PKGS=(
+    "neovim"
+    "python"
+    "python3"
+    "the_silver_searcher"
+    "tmux"
+    "yadm"
+    "zsh"
+)
+
+PIP_PKGS=(
+    "envtpl"
+    "ipython"
+    "flake8"
+    "pylint"
+    "virtualenv"
+    "virtualenvwrapper"
+)
+
+function install_brew() {
+    # This will likely never be executed as brew is going to be used to install yadm but just in case
+    if [ ! $(command -v brew) ]; then
+        /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    fi
+    if [ ! $(brew tap | grep "caskroom/cask") ]; then
+        brew tap caskroom/cask
+    fi
+}
+
+function install_ohmyzsh() {
+    if [ ! -d "${OMZSH_DIR}" ]; then
+        # Manual install as oh my zsh installer is pesky and tries to change things
+        git clone git://github.com/robbyrussell/oh-my-zsh.git "${OMZSH_DIR}"
+    fi
+    
+    # Install spaceship theme for ohmyzsh
+    spaceship_path="${OMZSH_DIR}/custom/themes"
+    if [ ! -e "${spaceship_path}/spaceship.zsh-theme" ]; then
+        mkdir -p "${spaceship_path}"
+        curl -o "${spaceship_path}/spaceship.zsh-theme" "https://raw.githubusercontent.com/denysdovhan/spaceship-zsh-theme/master/spaceship.zsh"
+    fi
+}
+
+function install_pkgs() {
+    # Install brew packages and link them
+    brew install $(printf " %s" "${BREW_PKGS[@]}")
+    brew link python python3  # These are not linked by default and we want this
+
+    sudo /usr/local/bin/pip3 install $(printf " %s" "${PIP_PKGS[@]}")
+}
+
+function install_alacritty() {
+    if [ ! -e "/Applications/Alacritty.app" ]; then
+        curl https://sh.rustup.rs -sSf | sh -s -- -y
+        git clone https://github.com/jwilm/alacritty.git "${REPO_DIR}/alacritty"
+        cd "${REPO_DIR}/alacritty"
+        ${HOME}/.cargo/bin/rustup override set stable
+        ${HOME}/.cargo/bin/rustup update stable
+        ${HOME}/.cargo/bin/cargo build --release
+        make app
+        cp -r target/release/osx/Alacritty.app /Applications/
+    fi
+}
+
+function bootstrap_vim() {
+    # Bootstrap vim plugins
+    if command -v nvim >/dev/null 2>&1; then
+        echo "Bootstraping Vim"
+        nvim '+PlugUpdate' '+PlugClean!' '+PlugUpdate' '+qall'
+    fi
+}
+
+function build_directories() {
+    mkdir -p ${REPO_DIR}/py
+}
+
+function main(){
+    install_brew
+    install_pkgs
+    install_ohmyzsh
+    install_alacritty
+    bootstrap_vim
+    build_directories
+}
+
+main
