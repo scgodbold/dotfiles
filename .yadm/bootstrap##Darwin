@@ -54,14 +54,16 @@ function install_pkgs() {
 }
 
 function install_alacritty() {
-    curl https://sh.rustup.rs -sSf | sh -s -- -y
-    git clone https://github.com/jwilm/alacritty.git "${REPO_DIR}/alacritty"
-    cd "${REPO_DIR}/alacritty"
-    ${HOME}/.cargo/bin/rustup override set stable
-    ${HOME}/.cargo/bin/rustup update stable
-    ${HOME}/.cargo/bin/cargo build --release
-    make app
-    cp -r target/release/osx/Alacritty.app /Applications/
+    if [ ! -e "/Applications/Alacritty.app" ]; then
+        curl https://sh.rustup.rs -sSf | sh -s -- -y
+        git clone https://github.com/jwilm/alacritty.git "${REPO_DIR}/alacritty"
+        cd "${REPO_DIR}/alacritty"
+        ${HOME}/.cargo/bin/rustup override set stable
+        ${HOME}/.cargo/bin/rustup update stable
+        ${HOME}/.cargo/bin/cargo build --release
+        make app
+        cp -r target/release/osx/Alacritty.app /Applications/
+    fi
 }
 
 function bootstrap_vim() {
