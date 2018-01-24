@@ -236,6 +236,14 @@ autocmd BufEnter *.sh setlocal tabstop=2
 autocmd BufEnter *.sh setlocal shiftwidth=2
 autocmd BufEnter *.sh setlocal softtabstop=2
 
+" 2 space tabs for yaml scripts
+autocmd BufEnter *.yml setlocal tabstop=2
+autocmd BufEnter *.yml setlocal shiftwidth=2
+autocmd BufEnter *.yml setlocal softtabstop=2
+autocmd BufEnter *.yaml setlocal tabstop=2
+autocmd BufEnter *.yaml setlocal shiftwidth=2
+autocmd BufEnter *.yaml setlocal softtabstop=2
+
 " -----------------------------------------------------------------------
 " 11. Syntastic Settings                               *syntastic_config*
 " -----------------------------------------------------------------------
