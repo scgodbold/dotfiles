@@ -76,6 +76,7 @@ function bootstrap_vim() {
 
 function build_directories() {
     mkdir -p ${REPO_DIR}/py
+    mkdir -p ${REPO_DIR}/go
 }
 
 function main(){
