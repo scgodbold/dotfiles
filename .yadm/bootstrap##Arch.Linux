@@ -33,7 +33,9 @@ function install_cower() {
         # Build cower
         mkdir -p ${AUR_DIR}
         git clone https://aur.archlinux.org/cower.git ${AUR_DIR}/cower
-        makepkg -si --noconfirm ${AUR_DIR}/cower/PKGBUILD
+        cd ${AUR_DIR}/cower
+        makepkg -si --noconfirm 
+        cd -
     fi
 }
 
@@ -42,30 +44,25 @@ function install_ohmyzsh() {
         # Manual install as oh my zsh installer is pesky and tries to change things
         git clone git://github.com/robbyrussell/oh-my-zsh.git "${OMZSH_DIR}"
     fi
-    
-    # Install spaceship theme for ohmyzsh
-    spaceship_path="${OMZSH_DIR}/custom/themes"
-    if [ ! -e "${spaceship_path}/spaceship.zsh-theme" ]; then
-        mkdir -p "${spaceship_path}"
-        curl -o "${spaceship_path}/spaceship.zsh-theme" "https://raw.githubusercontent.com/denysdovhan/spaceship-zsh-theme/master/spaceship.zsh"
-    fi
 }
 
 function install_pkgs() {
     # Install all pacman packages
-    sudo pacman -S --needed --noconfirm "$(printf ' %s' ${REQUIRED_PKGS[@]})"
+    sudo pacman -S --needed --noconfirm $(printf ' %s' ${REQUIRED_PKGS[@]})
 
     # Install aur packages
     for pkg in ${AUR_PKGS[@]}; do
         if [[ ! $(cower -i ${pkg} | grep "installed") ]]; then
-            /usr/bin/cower -d "pkg"
-            makepkg -si --noconfirm "${AUR_DIR}/${pkg}/PKGBUILD"
+            /usr/bin/cower -d "${pkg}"
+            cd ${AUR_DIR}/${pkg}
+            makepkg -si --noconfirm 
+            cd -
         fi
     done
 }
 
 function install_pip_pkgs() {
-    sudo pip install "$(printf ' %s' ${PIP_PKGS[@]})"
+    sudo pip install $(printf ' %s' ${PIP_PKGS[@]})
 }
 
 function bootstrap_vim() {

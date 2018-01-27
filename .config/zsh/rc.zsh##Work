@@ -1,10 +1,13 @@
 # ZSH config file
 #
 # Author: Scott Godbold
-# Last Updated: January 11, 2018
+# Last Updated: January 27, 2018
 # 
 # Changelog:
 #
+# 2018.1.27
+#   * Add Zplug
+#   * Move up load order for work file
 # 2018.1.11
 #   * Added file that can be controlled for work stuff
 # 2018.1.7
@@ -16,13 +19,17 @@
 ZDOT_DIR="${HOME}/.config/zsh"
 
 source "${ZDOT_DIR}/tmux.zsh"
+source "${ZDOT_DIR}/zplug.zsh"
 source "${ZDOT_DIR}/ohmy.zsh"
+
+# Give the option to add work specific stuff 
+# Push this higher up so we can alter python path and the like
+if [ -e "${ZDOT_DIR}/work.zsh" ]; then 
+    source "${ZDOT_DIR}/work.zsh"
+fi
 source "${ZDOT_DIR}/aliases.zsh"
 source "${ZDOT_DIR}/py_venv.zsh"
 source "${ZDOT_DIR}/env_vars.zsh"
 source "${ZDOT_DIR}/functions.zsh"
 
-# Give the option to add work specific stuff 
-if [ -e "${ZDOT_DIR}/work.zsh" ]; then 
-    source "${ZDOT_DIR}/work.zsh"
-fi
+zplug load
