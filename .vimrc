@@ -55,6 +55,8 @@ Plug 'christoomey/vim-tmux-navigator'       " Make vim and tmux play together
 Plug 'ctrlpvim/ctrlp.vim'                   " Ctrl-p for the file openings
 Plug 'nathanaelkane/vim-indent-guides'      " This should help me view the indent levels
 Plug 'tweekmonster/braceless.vim'           " Braceless vim for better python folding & movement
+Plug 'tpope/vim-fugitive'                   " Need git access from vim
+Plug 'tpope/vim-vinegar'                    " File navigation
 
 call plug#end()   				            " end vundle managed plugins
 
@@ -121,6 +123,7 @@ set smartcase                       " unless we want case
 " Ctrl-p settings
 set wildignore+=*.pyc,.git/*,*.swp  " Custom ignore files
 let g:ctrlp_use_caching=0           " Disable caching
+let g:ctrlp_work_path_mode='cr'     " Start by looking in cwd
 
 " Ignore files in gitignore and use silver searcher if able
 if executable('ag')
@@ -143,6 +146,8 @@ set foldmethod=indent   " Fold on indent levels
 
 " Braceless for maybe even better folding & indententing
 autocmd FileType python BracelessEnable +indent +fold
+
+autocmd BufEnter *.py.erb BracelessEnable +indent +fold
 
 
 " -----------------------------------------------------------------------
@@ -243,6 +248,12 @@ autocmd BufEnter *.yml setlocal softtabstop=2
 autocmd BufEnter *.yaml setlocal tabstop=2
 autocmd BufEnter *.yaml setlocal shiftwidth=2
 autocmd BufEnter *.yaml setlocal softtabstop=2
+
+" Python syntax for .py.erb
+autocmd BufEnter *.sh.erb set syntax=sh
+
+" Python syntax for .py.erb
+autocmd BufEnter *.py.erb setlocal syntax=python
 
 " -----------------------------------------------------------------------
 " 11. Syntastic Settings                               *syntastic_config*

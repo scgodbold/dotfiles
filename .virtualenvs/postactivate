@@ -1,6 +1,6 @@
 #!/bin/zsh
 # This hook is run after every virtualenv is activated.
-proj_name=$(echo $VIRTUAL_ENV|awk -F'/' '{print $NF}')
-if [ -d $HOME/repos/py/$proj_name ]; then
-    cd $HOME/repos/py/$proj_name
-fi
+# proj_name=$(echo $VIRTUAL_ENV|awk -F'/' '{print $NF}')
+# if [ -d $HOME/repos/py/$proj_name ]; then
+#     cd $HOME/repos/py/$proj_name
+# fi

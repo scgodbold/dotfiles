@@ -13,7 +13,7 @@
 
 ZSH="${HOME}/.oh-my-zsh"                                        # Change our zsh Path to OMZSH
 ZSH_THEME="spaceship"                                           # Set our theme
-plugins=(git last-working-dir pip sudo python vi-mode history)  # And dont forget the plugins
+plugins=(git last-working-dir pip sudo python vi-mode history kitchen knife emoji)  # And dont forget the plugins
 bindkey -v                                                      # Vim Mode, cause this is a vim shop
 source "${ZSH}/oh-my-zsh.sh"                                    # source that isssh
 

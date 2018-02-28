@@ -10,5 +10,5 @@
 # ------------------------------------------------------------------------------------
 
 if [[ ! $TERM =~ screen ]]; then
-        exec tmux  # only tmux if we arent already tmux
+        exec ${HOME}/.local/bin/tmux  # only tmux if we arent already tmux
 fi
