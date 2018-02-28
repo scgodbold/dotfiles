@@ -9,6 +9,7 @@ BREW_PKGS=(
     "the_silver_searcher"
     "tmux"
     "yadm"
+    "zplug"
     "zsh"
 )
 
@@ -19,6 +20,7 @@ PIP_PKGS=(
     "pylint"
     "virtualenv"
     "virtualenvwrapper"
+    "tmuxp"
 )
 
 function install_brew() {

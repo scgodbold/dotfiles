@@ -12,32 +12,10 @@
 # ------------------------------------------------------------------------------------
 
 ZSH="${HOME}/.oh-my-zsh"                                        # Change our zsh Path to OMZSH
-ZSH_THEME="spaceship"                                           # Set our theme
-plugins=(git last-working-dir pip sudo python vi-mode history kitchen knife emoji)  # And dont forget the plugins
+plugins=(git pip sudo python vi-mode history kitchen knife)  # And dont forget the plugins
 bindkey -v                                                      # Vim Mode, cause this is a vim shop
 source "${ZSH}/oh-my-zsh.sh"                                    # source that isssh
+ZSH_THEME="refined"                                           # Set our theme, after source, we let zplug handle this
 
-# Configure the theme
-SPACESHIP_PROMPT_ORDER=(
-time
-vi_mode
-venv
-git_branch
-dir
-line_sep
-char
-)
-SPACESHIP_PROMPT_DEFAULT_PREFIX=" "
-SPACESHIP_TIME_SHOW=true
-SPACESHIP_TIME_COLOR=black
-SPACESHIP_TIME_PREFIX=""
-SPACESHIP_VENV_PREFIX="("
-SPACESHIP_VENV_SUFFIX=") "
-SPACESHIP_VENV_COLOR=black
-SPACESHIP_DIR_PREFIX=""
-SPACESHIP_DIR_SUFFIX=" "
-SPACESHIP_DIR_COLOR=blue
-SPACESHIP_GIT_BRANCH_PREFIX="("
-SPACESHIP_GIT_BRANCH_SUFFIX=") "
-SPACESHIP_GIT_BRANCH_COLOR=black
-SPACESHIP_VI_MODE_COLOR=black
+ZSH_AUTOSUGGEST_USE_ASYNC=true
+TIPZ_TEXT='Alias tip:'
