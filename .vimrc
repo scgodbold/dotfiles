@@ -57,6 +57,8 @@ Plug 'nathanaelkane/vim-indent-guides'      " This should help me view the inden
 Plug 'tweekmonster/braceless.vim'           " Braceless vim for better python folding & movement
 Plug 'tpope/vim-fugitive'                   " Need git access from vim
 Plug 'tpope/vim-vinegar'                    " File navigation
+Plug 'tpope/vim-commentary'                 " File navigation
+Plug 'hashivim/vim-terraform'               " Terraform formating
 
 call plug#end()   				            " end vundle managed plugins
 
