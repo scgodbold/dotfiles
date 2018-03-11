@@ -59,6 +59,7 @@ Plug 'tpope/vim-fugitive'                   " Need git access from vim
 Plug 'tpope/vim-vinegar'                    " File navigation
 Plug 'tpope/vim-commentary'                 " File navigation
 Plug 'hashivim/vim-terraform'               " Terraform formating
+Plug 'fatih/vim-go'                         " Support go development
 
 call plug#end()   				            " end vundle managed plugins
 
