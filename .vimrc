@@ -174,6 +174,8 @@ nnoremap gV `[v`]
 " remaping : to ; and save all the keystrokes
 nnoremap ; :
 
+" Remove command window, I dont find it useful for my work flow
+nnoremap q: :q
 
 " -----------------------------------------------------------------------
 " 08. Leader Bindings                                      *leader_binds*
