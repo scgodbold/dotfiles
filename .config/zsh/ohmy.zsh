@@ -12,7 +12,7 @@
 # ------------------------------------------------------------------------------------
 
 ZSH="${HOME}/.oh-my-zsh"                                        # Change our zsh Path to OMZSH
-plugins=(git pip sudo python vi-mode history kitchen knife)  # And dont forget the plugins
+plugins=(git pip sudo python vi-mode history kitchen knife terraform)  # And dont forget the plugins
 bindkey -v                                                      # Vim Mode, cause this is a vim shop
 source "${ZSH}/oh-my-zsh.sh"                                    # source that isssh
 ZSH_THEME="refined"                                           # Set our theme, after source, we let zplug handle this

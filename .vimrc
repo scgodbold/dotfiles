@@ -260,6 +260,10 @@ autocmd BufEnter *.sh.erb set syntax=sh
 " Python syntax for .py.erb
 autocmd BufEnter *.py.erb setlocal syntax=python
 
+" Autoformat terrform files on save
+let g:terraform_fmt_on_save=1                 
+let g:terraform_align=1                 
+
 " -----------------------------------------------------------------------
 " 11. Syntastic Settings                               *syntastic_config*
 " -----------------------------------------------------------------------
