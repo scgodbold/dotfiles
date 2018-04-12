@@ -16,4 +16,3 @@ export HISTSIZE=10000    # All the history, so I can look back to the dawn of ti
 
 export DISABLE_AUTO_TITLE=true
 export GOPATH=${HOME}/repos/go
-export TMUXP_CONFIGDIR=${HOME}/.config/tmuxp
