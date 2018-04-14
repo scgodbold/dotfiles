@@ -12,6 +12,7 @@ BREW_PKGS=(
     "zplug"
     "zsh"
     "direnv"
+    "entr"
 )
 
 PIP_PKGS=(
