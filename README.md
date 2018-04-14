@@ -25,4 +25,5 @@ Currently YADM does not have a switch on the distro type for linux so I have use
 | Class | Description |
 | ------ | ------ |
 | Arch | Specifies the linux distribution as Arch Linux. |
+| Ubunut | Sepficies the linux distribution as Ubunut. |
 | Work | Specifies as a work computer. |
