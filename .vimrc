@@ -60,6 +60,7 @@ Plug 'tpope/vim-vinegar'                    " File navigation
 Plug 'tpope/vim-commentary'                 " File navigation
 Plug 'hashivim/vim-terraform'               " Terraform formating
 Plug 'fatih/vim-go'                         " Support go development
+Plug 'pprovost/vim-ps1'                     " Support powershell when I have to use it
 
 call plug#end()   				            " end vundle managed plugins
 
