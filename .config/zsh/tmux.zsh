@@ -10,7 +10,7 @@
 # ------------------------------------------------------------------------------------
 
 export TMUXP_CONFIGDIR=${HOME}/.config/tmuxp
-export DISABLE_AUTO_TITLE = 'true'
+export DISABLE_AUTO_TITLE='true'
 
 if [[ ! $TERM =~ screen ]]; then
     for env in $(ls ${TMUXP_CONFIGDIR} | grep yaml | grep -v default); do

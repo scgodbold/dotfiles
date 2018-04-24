@@ -17,6 +17,7 @@ REQUIRED_PKGS=(
 
 AUR_PKGS=(
     "alacritty-git"
+    "direnv"
 )
 
 PIP_PKGS=(

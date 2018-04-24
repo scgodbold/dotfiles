@@ -33,3 +33,4 @@ source "${ZDOT_DIR}/env_vars.zsh"
 source "${ZDOT_DIR}/functions.zsh"
 
 zplug load
+eval "$(direnv hook zsh)"

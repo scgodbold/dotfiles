@@ -25,3 +25,4 @@ source "${ZDOT_DIR}/functions.zsh"
 
 # On more post load, themes didn't work till I did this
 zplug load
+eval "$(direnv hook zsh)"

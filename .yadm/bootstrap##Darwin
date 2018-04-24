@@ -11,6 +11,7 @@ BREW_PKGS=(
     "yadm"
     "zplug"
     "zsh"
+    "direnv"
 )
 
 PIP_PKGS=(
