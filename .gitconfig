@@ -12,3 +12,5 @@
     forcepush = push -f
     fixcommit = commit -m 'fixes'
     updatemaster = "!f() { cur_branch=$(git symbolic-ref --short HEAD); git checkout master; git pull origin master; git checkout $cur_branch; }; f"
+    draft = "push origin HEAD:refs/drafts/master"
+    review = "push origin HEAD:refs/publish/master"
