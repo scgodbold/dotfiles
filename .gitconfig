@@ -12,5 +12,6 @@
     forcepush = push -f
     fixcommit = commit -m 'fixes'
     updatemaster = "!f() { cur_branch=$(git symbolic-ref --short HEAD); git checkout master; git pull origin master; git checkout $cur_branch; }; f"
-    draft = "push origin HEAD:refs/drafts/master"
-    review = "push origin HEAD:refs/publish/master"
+    draft = "!f() { [ \"$#\" -gt \"1\" ] && echo 'Usage: git draft [REMOTE]\n\n-- REMOTE defaults to origin' || remote=${1-origin}; git push $remote HEAD:refs/drafts/master;}; f"
+    review = "!f() { [ \"$#\" -gt \"1\" ] && echo 'Usage: git review [REMOTE]\n\n-- REMOTE defaults to origin' || remote=${1-origin}; git push $remote HEAD:refs/publish/master;}; f"
+    amend = "commit --amend --no-edit"
