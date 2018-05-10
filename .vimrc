@@ -14,7 +14,7 @@
 "       * Switched to vimplug from vundle
 "       * Autocreate directories on start that are required by vim
 "       * Remove jk/kj hot mappings, caused issues
-"               
+"
 
 " -----------------------------------------------------------------------
 
@@ -73,7 +73,7 @@ syntax enable			                " Enable Syntax Highlighting
 silent! colorscheme sierra              " our colorscheme definition
 
 " This sets opacity to match the terminal settings
-hi Normal ctermbg=none  
+hi Normal ctermbg=none
 hi NonText ctermbg=none
 
 " Set lightline colorscheme
@@ -99,8 +99,8 @@ autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd ctermbg=238  " Declare custom
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=240 " Declare custom odd line color
 let g:indent_guides_enable_on_vim_startup = 1                   " Lets have this on by default, <leader>ig to disable
 
-" Strip away trailing whitespace from python files
-autocmd BufWritePre *.py :%s/\s\+$//e
+" Strip away trailing whitespace from all files
+autocmd BufWritePre * :%s/\s\+$//e
 
 " -----------------------------------------------------------------------
 " 04. UI Configuration                                        *ui_config*
@@ -265,8 +265,8 @@ autocmd BufEnter *.py.erb setlocal syntax=python
 autocmd FileType make setlocal noexpandtab
 
 " Autoformat terrform files on save
-let g:terraform_fmt_on_save=1                 
-let g:terraform_align=1                 
+let g:terraform_fmt_on_save=1
+let g:terraform_align=1
 
 " -----------------------------------------------------------------------
 " 11. Syntastic Settings                               *syntastic_config*
