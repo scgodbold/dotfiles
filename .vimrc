@@ -52,7 +52,6 @@ Plug 'alessandroyorba/sierra'               " Sierra colors, the new hotness
 Plug 'scrooloose/syntastic'                 " all the syntax checking
 Plug 'itchyny/lightline.vim'                " A lighter status line than airline
 Plug 'christoomey/vim-tmux-navigator'       " Make vim and tmux play together
-Plug 'ctrlpvim/ctrlp.vim'                   " Ctrl-p for the file openings
 Plug 'nathanaelkane/vim-indent-guides'      " This should help me view the indent levels
 Plug 'tweekmonster/braceless.vim'           " Braceless vim for better python folding & movement
 Plug 'tpope/vim-fugitive'                   " Need git access from vim
@@ -126,18 +125,10 @@ set smartcase                       " unless we want case
 
 " Ctrl-p settings
 set wildignore+=*.pyc,.git/*,*.swp  " Custom ignore files
-let g:ctrlp_use_caching=0           " Disable caching
-let g:ctrlp_work_path_mode='cr'     " Start by looking in cwd
 
 " Ignore files in gitignore and use silver searcher if able
 if executable('ag')
     set grepprg=ag\ --nogroup\ --nocolor
-    let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-else
-    let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
-    let g:ctrlp_prompt_mappings = {
-        \ 'AcceptSelection("e")': ['<space>', '<cr>'],
-    \ }
 endif
 
 " -----------------------------------------------------------------------
@@ -197,9 +188,6 @@ nnoremap <leader>c :nohlsearch<CR>
 
 " Make folding and unfolding easier w/ space
 nnoremap <leader>f za
-
-" rebind control p keybings
-nnoremap <leader>o :CtrlP<CR>
 
 " I want a redraw keybinding
 nnoremap <leader>r :redraw!<CR>

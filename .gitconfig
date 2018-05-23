@@ -15,3 +15,5 @@
     draft = "!f() { [ \"$#\" -gt \"1\" ] && echo 'Usage: git draft [REMOTE]\n\n-- REMOTE defaults to origin' || remote=${1-origin}; git push $remote HEAD:refs/drafts/master;}; f"
     review = "!f() { [ \"$#\" -gt \"1\" ] && echo 'Usage: git review [REMOTE]\n\n-- REMOTE defaults to origin' || remote=${1-origin}; git push $remote HEAD:refs/publish/master;}; f"
     amend = "commit --amend --no-edit"
+[core]
+    excludesfile = ~/.gitignore
