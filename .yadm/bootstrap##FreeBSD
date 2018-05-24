@@ -1,0 +1,50 @@
+#!/bin/sh
+
+REPO_DIR="${HOME}/repos"
+OMZSH_DIR="${HOME}/.oh-my-zsh"
+
+install_ohmyzsh() {
+    if [ ! -d "${HOME}/.oh-my-zsh" ]; then
+        # Manual install as oh my zsh installer is pesky and tries to change things
+        git clone git://github.com/robbyrussell/oh-my-zsh.git "${OMZSH_DIR}"
+    fi
+}
+
+install_alacritty() {
+    if [ ! -e /usr/local/bin/alacritty ]; then
+        cd /usr/ports/x11/alacritty
+	sudo make -DBATCH install clean
+        cd ${previous_dir}
+    fi
+}
+
+install_pkgs() {
+    sudo pkg install -y vim neovim curl git tmux zsh python3 python36 py36-pip cmake direnv entr the_silver_searcher go
+}
+
+install_pip_pkgs() {
+    sudo /usr/local/bin/pip-3.6 install envtpl ipython flake8 pylint tmuxp virtualenv virtualenvwrapper
+}
+
+build_directories() {
+    mkdir -p ${REPO_DIR}/py
+    mkdir -p ${REPO_DIR}/go
+}
+
+bootstrap_vim() {
+    # Bootstrap vim plugins
+    if command -v vim >/dev/null 2>&1; then
+        echo "Bootstraping Vim"
+        vim '+PlugUpdate' '+PlugClean!' '+PlugUpdate' '+qall'
+    fi
+}
+
+main() {
+    build_directories
+    install_pkgs
+    install_pip_pkgs
+    install_ohmyzsh
+    install_alacritty
+}
+
+main
