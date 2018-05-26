@@ -16,7 +16,7 @@
 # 01. Base Settings                                                    *tmux_base*
 # --------------------------------------------------------------------------------
 # Set tmux default shell
-set-option -g default-shell /bin/zsh
+set-option -g default-shell /usr/local/bin/zsh
 
 # Declare Ctrl-a as prefix
 set -g prefix C-a

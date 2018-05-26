@@ -19,7 +19,7 @@ install_alacritty() {
 }
 
 install_pkgs() {
-    sudo pkg install -y vim neovim curl git tmux zsh python3 python36 py36-pip cmake direnv entr the_silver_searcher go
+    sudo pkg install -y vim neovim curl git tmux zsh python3 python36 py36-pip cmake direnv entr the_silver_searcher go symbola xclip
 }
 
 install_pip_pkgs() {
