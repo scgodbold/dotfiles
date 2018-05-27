@@ -19,7 +19,3 @@ ZSH_THEME="refined"                                           # Set our theme, a
 
 ZSH_AUTOSUGGEST_USE_ASYNC=true
 TIPZ_TEXT='Alias tip:'
-
-PURE_PROMPT_SYMBOL='>'
-PURE_GIT_DOWN_ARROW='^'
-PURE_GIT_UP_ARROW='v'
