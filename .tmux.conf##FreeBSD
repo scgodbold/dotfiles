@@ -1,4 +1,4 @@
-# Tmux Config 
+# Tmux Config
 #
 # Author: Scott Godbold Last Update: January 7, 2018 Changelog: 2018.1.7
 #       * Fix mouse issues on tmux first run
@@ -20,17 +20,17 @@ set-option -g default-shell /usr/local/bin/zsh
 
 # Declare Ctrl-a as prefix
 set -g prefix C-a
-bind C-a send-prefix                                       
+bind C-a send-prefix
 
 # Unbind the old prefix
-unbind C-b                                                
+unbind C-b
 
 # Send prefix for nested sessions
 bind-key a send-prefix
 
 # onto vim mode
-set-option -g status-keys vi                                
-set-window-option -g mode-keys vi                            
+set-option -g status-keys vi
+set-window-option -g mode-keys vi
 
 # Escape key was being delayed in neovim from tmux
 set -sg escape-time 0
@@ -66,7 +66,7 @@ bind - split-window -v -c "#{pane_current_path}"
 bind c new-window -c "#{pane_current_path}"
 
 # Prevent the pane from renaming itself since they would all be zsh
-set-option -g allow-rename off      
+set-option -g allow-rename off
 
 # --------------------------------------------------------------------------------
 # 04. Colorscheme                                               *tmux_colorscheme*
@@ -76,30 +76,30 @@ set-option -g allow-rename off
 set-option -ga terminal-overrides ",xterm-256color:Tc"
 
 # Statusbar defaults
-set-option -g status-bg colour235                 
-set-option -g status-fg colour130                  
-set-option -g status-attr default                   
+set-option -g status-bg colour235
+set-option -g status-fg colour130
+set-option -g status-attr default
 
 # Window Title Defaults
-set-window-option -g window-status-fg colour33       
-set-window-option -g window-status-bg default         
+set-window-option -g window-status-fg colour33
+set-window-option -g window-status-bg default
 
 # active window title colors
 set-window-option -g window-status-current-fg colour196
-set-window-option -g window-status-current-bg default   
+set-window-option -g window-status-current-bg default
 #set-window-option -g window-status-current-attr bright
 
 # Pane border colors
-set-option -g pane-border-fg colour130             
-set-option -g pane-active-border-fg colour130       
+set-option -g pane-border-fg colour130
+set-option -g pane-active-border-fg colour130
 
 # message text colors
-set-option -g message-bg colour235                   
-set-option -g message-fg colour196                    
+set-option -g message-bg colour235
+set-option -g message-fg colour196
 
 # pane number display colors
-set-option -g display-panes-active-colour colour20     
-set-option -g display-panes-colour colour196            
+set-option -g display-panes-active-colour colour20
+set-option -g display-panes-colour colour196
 
 # --------------------------------------------------------------------------------
 # 05. Statusbar                                                   *tmux_statusbar*
