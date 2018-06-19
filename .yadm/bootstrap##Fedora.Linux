@@ -1,0 +1,92 @@
+#! /bin/bash
+REPO_DIR="${HOME}/repos"
+OMZSH_DIR="${HOME}/.oh-my-zsh"
+
+REQUIRED_PKGS=(
+    "vim"
+    "neovim"
+    "git"
+    "tmux"
+    "zsh"
+    "the_silver_searcher"
+    "python3-pip"
+    "cmake"
+    "xclip"
+    "entr"
+    "curl"
+    "direnv"
+    "redhat-rpm-config"
+    "python3-devel"
+    "freetype-devel"
+    "fontconfig"
+    "gcc-c++"
+)
+
+PIP_PKGS=(
+    "envtpl"
+    "ipython"
+    "flake8"
+    "pylint"
+    "tmuxp"
+    "virtualenv"
+    "virtualenvwrapper"
+)
+
+function install_ohmyzsh() {
+    if [ ! -d "${HOME}/.oh-my-zsh" ]; then
+        # Manual install as oh my zsh installer is pesky and tries to change things
+        git clone git://github.com/robbyrussell/oh-my-zsh.git "${OMZSH_DIR}"
+    fi
+}
+
+function install_pkgs() {
+    # Install all pacman packages
+    sudo dnf install -y $(printf ' %s' ${REQUIRED_PKGS[@]})
+}
+
+function install_pip_pkgs() {
+    sudo pip3 install $(printf ' %s' ${PIP_PKGS[@]})
+}
+
+function bootstrap_vim() {
+    # Bootstrap vim plugins
+    if command -v vim >/dev/null 2>&1; then
+        echo "Bootstraping Vim"
+        vim '+PlugUpdate' '+PlugClean!' '+PlugUpdate' '+qall'
+    fi
+}
+
+function install_alacritty() {
+    if [ ! -e /usr/local/bin/alacritty ]; then
+        local alacritty_dir="${REPO_DIR}/github.com/jwilm/alacritty"
+        curl https://sh.rustup.rs -sSf | sh -s -- -y
+        mkdir -p "${REPO_DIR}/github.com/jwilm/"
+        git clone https://github.com/jwilm/alacritty.git "${REPO_DIR}/github.com/jwilm/alacritty"
+        cd "${alacritty_dir}"
+        ${HOME}/.cargo/bin/rustup override set stable
+        ${HOME}/.cargo/bin/rustup update stable
+        ${HOME}/.cargo/bin/cargo build --release
+        make app
+        sudo cp target/release/alacritty /usr/local/bin # or anywhere else in $PATH
+        sudo desktop-file-install alacritty.desktop
+    fi
+}
+
+function build_directories() {
+    mkdir -p ${REPO_DIR}/py
+    mkdir -p ${REPO_DIR}/go
+}
+
+function main(){
+    build_directories
+    install_pkgs
+    install_ohmyzsh
+    install_pip_pkgs
+    install_alacritty
+    bootstrap_vim
+
+    # Run the yadm alt program once envtpl is installed to complete the installation
+    yadm alt
+}
+
+main
