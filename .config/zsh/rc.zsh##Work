@@ -2,7 +2,7 @@
 #
 # Author: Scott Godbold
 # Last Updated: January 27, 2018
-# 
+#
 # Changelog:
 #
 # 2018.1.27
@@ -18,9 +18,9 @@
 
 ZDOT_DIR="${HOME}/.config/zsh"
 
-# Give the option to add work specific stuff 
+# Give the option to add work specific stuff
 # Push this higher up so we can alter python path and the like
-if [ -e "${ZDOT_DIR}/work.zsh" ]; then 
+if [ -e "${ZDOT_DIR}/work.zsh" ]; then
     source "${ZDOT_DIR}/work.zsh"
 fi
 source "${ZDOT_DIR}/tmux.zsh"

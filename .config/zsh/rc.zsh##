@@ -23,6 +23,11 @@ source "${ZDOT_DIR}/py_venv.zsh"
 source "${ZDOT_DIR}/env_vars.zsh"
 source "${ZDOT_DIR}/functions.zsh"
 
+# Allow for temporary local changes that do not need to be source controlled
+if [ -e "${ZDOT_DIR}/local.zsh" ]; then
+    source "${ZDOT_DIR}/local.zsh"
+fi
+
 # On more post load, themes didn't work till I did this
 zplug load
 eval "$(direnv hook zsh)"
