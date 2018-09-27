@@ -1,0 +1,25 @@
+#!/bin/bash
+
+exec_name=${1}
+
+if [[ -z "${1}" ]]; then
+    echo "Must give executable a name"
+    exit 1
+fi
+
+# Add .bin to envrc if it doesnt exisexitt
+path_added=$(grep -c "PATH_add .bin" .envrc)
+if [[ "1" -ne "${path_added}" ]]; then
+    echo "PATH_add .bin" >> .envrc
+    direnv allow .envrc
+fi
+
+# create binary dir that is included in path
+mkdir -p .bin
+cat > .bin/${exec_name} <<EOF
+#!/bin/bash
+echo "${exec_name} made from mk.exec"
+EOF
+
+touch .bin/${exec_name}
+chmod +x .bin/${exec_name}
