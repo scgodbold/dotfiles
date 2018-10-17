@@ -13,6 +13,7 @@ export PATH=$PATH:/opt/local/bin:/opt/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/
 
 export EDITOR='nvim'     # Is there any other editor really?
 export HISTSIZE=10000    # All the history, so I can look back to the dawn of time (but not really)
+export PROJECT_DIR="${HOME}/repos"
 
 export DISABLE_AUTO_TITLE=true
 export GOPATH=${HOME}/repos/go

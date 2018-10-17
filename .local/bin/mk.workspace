@@ -1,0 +1,18 @@
+#!/bin/bash
+if [ -z "${1}" ]; then
+    echo "Must specify the name of the workspace to create"
+    exit 1
+fi
+
+workspace="${1}"
+tmux=$(which tmux)
+
+${tmux} has -t ${workspace} 2> /dev/null
+exists="${?}"
+if [ "${exists}" = "0" ]; then
+    echo "${workspace} already exists, just use that"
+    exit 1
+fi
+
+${tmux} new-session -d -c "#{pane_current_path}" -s "${workspace}"
+${tmux} switch-client -t ${workspace}

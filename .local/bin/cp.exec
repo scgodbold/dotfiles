@@ -1,0 +1,21 @@
+#!/bin/bash
+#!/bin/bash
+if [ "${#}" -ne "2" ]; then
+    echo "Usage: ${0} SRC DST"
+    exit 1
+fi
+
+src="$(which $1)"
+dst="${2}"
+
+path_added=$(grep -c "PATH_add .bin" .envrc)
+if [[ "1" -ne "${path_added}" ]]; then
+    echo "PATH_add .bin" >> .envrc
+    direnv allow .envrc
+fi
+
+# create binary dir that is included in path
+mkdir -p .bin
+cp ${src} .bin/${dst}
+
+chmod +x .bin/${dst}

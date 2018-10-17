@@ -18,9 +18,9 @@ ZDOT_DIR="${HOME}/.config/zsh"
 source "${ZDOT_DIR}/tmux.zsh"
 source "${ZDOT_DIR}/zplug.zsh"
 source "${ZDOT_DIR}/ohmy.zsh"
-source "${ZDOT_DIR}/aliases.zsh"
 source "${ZDOT_DIR}/py_venv.zsh"
 source "${ZDOT_DIR}/env_vars.zsh"
+source "${ZDOT_DIR}/aliases.zsh"
 source "${ZDOT_DIR}/functions.zsh"
 
 # Allow for temporary local changes that do not need to be source controlled

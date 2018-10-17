@@ -1,0 +1,17 @@
+#!/bin/bash
+if [ -z "${1}" ]; then
+    echo "Must specify the name of the workspace to delete"
+    exit 1
+fi
+
+workspace="${1}"
+tmux=$(which tmux)
+
+${tmux} has -t ${workspace} 2> /dev/null
+exists="${?}"
+if [ "${exists}" != "0" ]; then
+    echo "${workspace} does not exist"
+    exit 1
+fi
+
+${tmux} kill-session -t ${workspace}

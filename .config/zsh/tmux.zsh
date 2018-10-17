@@ -12,8 +12,5 @@
 export TMUXP_CONFIGDIR=${HOME}/.config/tmuxp
 export DISABLE_AUTO_TITLE='true'
 if [[ ! $TERM =~ screen ]]; then
-    for env in $(ls ${TMUXP_CONFIGDIR} | grep yaml | grep -v default); do
-        /usr/local/bin/tmuxp load -d $(echo ${env} | cut -d'.' -f1) 2>&1 > /dev/null &
-    done
     exec /usr/bin/tmux attach -t default # only tmux if we arent already tmux
 fi

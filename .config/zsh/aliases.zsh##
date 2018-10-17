@@ -23,5 +23,8 @@ alias ts='tmux new -s'                                      # Create a new tmux 
 alias ta='tmux attach -t'                                   # attach to the given tmux session
 alias td='tmux detach-client'                               # detach from tmux client
 
+# Project directory jumping
+alias pj="cd ${HOME}/repos"
+
 # My custom scripts
 bindkey '^R' history-incremental-search-backward            # Vim mode disables reverse search, fix that
