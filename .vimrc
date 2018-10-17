@@ -256,6 +256,11 @@ autocmd FileType make setlocal noexpandtab
 let g:terraform_fmt_on_save=1
 let g:terraform_align=1
 
+" Ruby tabs
+autocmd FileType ruby setlocal tabstop=2
+autocmd FileType ruby setlocal shiftwidth=2
+autocmd FileType ruby setlocal softtabstop=2
+
 " -----------------------------------------------------------------------
 " 11. Syntastic Settings                               *syntastic_config*
 " -----------------------------------------------------------------------

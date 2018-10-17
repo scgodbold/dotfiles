@@ -4,3 +4,12 @@ windows:
   - window_name: home
     panes:
       - blank
+    focus: True
+  - window_name: repo_home
+    start_directory: repos
+    panes:
+      - blank
+  - window_name: config
+    start_directory: .config
+    panes:
+      - blank
