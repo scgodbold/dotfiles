@@ -19,6 +19,30 @@ mkdir -p .bin
 cat > .bin/${exec_name} <<EOF
 #!/bin/bash
 echo "${exec_name} made from mk.exec"
+
+
+# Add framework for parsing arguments
+# For flags shift is sufficient
+# If flag comes with its own argument you can do
+# > shift 2;
+PARAMS=""
+while (("\$#")); do
+    case "\$1" in
+        -*|--*)  # Quit if bad args passed in
+            echo "Unknown option provided: \$1"
+            exit 1
+            ;;
+        --) # End arg parsing
+            shift
+            break
+            ;;
+        *)  # Handle postional args
+            PARAMS="\$PARAMS \$1"
+            shift
+            ;;
+    esac
+done
+eval set -- "\$PARAMS"
 EOF
 
 touch .bin/${exec_name}
