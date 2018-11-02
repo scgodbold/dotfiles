@@ -28,6 +28,11 @@ echo "${exec_name} made from mk.exec"
 PARAMS=""
 while (("\$#")); do
     case "\$1" in
+        -d|--debug)
+            set -x
+            DEBUG=true
+            shift
+            ;;
         -*|--*)  # Quit if bad args passed in
             echo "Unknown option provided: \$1"
             exit 1
