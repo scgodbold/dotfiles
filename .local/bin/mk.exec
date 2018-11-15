@@ -7,7 +7,8 @@ if [[ -z "${1}" ]]; then
     exit 1
 fi
 
-# Add .bin to envrc if it doesnt exisexitt
+# Add .bin to envrc if it doesnt exist
+touch .envrc  # force this file to exist prevents script from complaining
 path_added=$(grep -c "PATH_add .bin" .envrc)
 if [[ "1" -ne "${path_added}" ]]; then
     echo "PATH_add .bin" >> .envrc

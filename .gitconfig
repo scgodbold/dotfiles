@@ -19,5 +19,6 @@
     amend = "commit --amend --no-edit"
     st = "stash"
     stp = "stash pop"
+    amendAndReview = "!f() { git add -u; git amend; git review; };f"
 [core]
     excludesfile = ~/.gitignore
