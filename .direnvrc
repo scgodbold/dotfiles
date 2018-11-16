@@ -1,0 +1,23 @@
+layout_virtualenv() {
+    local venv_path="$1"
+    source ${venv_path}/bin/activate
+}
+
+layout_virtualenvwrapper() {
+    local venv_path="${WORKON_HOME}/$1"
+    layout_virtualenv $venv_path
+}
+
+set_tmux_win_name() {
+    # Sets the tmux window name, if no name is given
+    # it will use the top two directories in the directory
+    # tree for a given window
+    local name=${1}
+    if [ -z "${name}" ]; then
+        name=$(pwd)
+        if [ $(echo ${name} | grep -o "/" | wc -l) -gt "2" ]; then
+            name=$(echo $(basename $(dirname $(pwd)))/$(basename $(pwd)))
+        fi
+    fi
+    tmux rename-window ${name}
+}
