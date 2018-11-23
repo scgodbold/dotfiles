@@ -25,3 +25,7 @@ alias td='tmux detach-client'                               # detach from tmux c
 
 # My custom scripts
 bindkey '^R' history-incremental-search-backward            # Vim mode disables reverse search, fix that
+
+# Project Movements
+alias pj="projectjump -b ${PROJECT_DIR}"
+alias pjg="projectjump -b ${PROJECT_DIR}/github.com"

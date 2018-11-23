@@ -4,7 +4,6 @@
 # Last Updated: January 7, 2018
 #
 # Changelog:
-#
 # 2018.1.7
 #   * Created functions.zsh
 # ------------------------------------------------------------------------------------
@@ -69,3 +68,45 @@ dockersandbox () {
     return 0
 }
 
+projectjump () {
+    local PARAMS=""
+    while [[ $# -gt 0 ]]; do
+        case "$1" in
+            -d|--debug)
+                set -x
+                DEBUG=true
+                shift
+                ;;
+            -b|--base-dir)
+                local BASEDIR="${2}"
+                shift 2
+                ;;
+            -*|--*)  # Quit if bad args passed in
+                echo "Unknown option provided: $1"
+                exit 1
+                ;;
+            --) # End arg parsing
+                shift
+                break
+                ;;
+            *)  # Handle postional args
+                local PARAMS="$PARAMS $1"
+                shift
+                ;;
+        esac
+    done
+    eval set -- "$PARAMS"
+
+
+    if [ -z $BASEDIR ]; then
+        # Set basedir to home if not specified
+        local BASEDIR="${HOME}"
+    fi
+
+    local target_dir="${1}"
+    if [ -z ${1} ]; then
+        echo "Must specify a directory to jump to"
+    fi
+
+    cd ${BASEDIR}/${target_dir}
+}

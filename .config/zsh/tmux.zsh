@@ -11,6 +11,8 @@
 
 export TMUXP_CONFIGDIR=${HOME}/.config/tmuxp
 export DISABLE_AUTO_TITLE='true'
+local tmux_bin=$(which tmux)
 if [[ ! $TERM =~ screen ]]; then
-    exec /usr/bin/tmux attach -t default # only tmux if we arent already tmux
+    # I guess new is what I wanted here :/ whatever
+    exec ${tmux_bin} new -A -s default
 fi
