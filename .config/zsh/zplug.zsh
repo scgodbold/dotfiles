@@ -8,17 +8,38 @@ fi
 
 source ${ZPLUG_HOME}/init.zsh
 
+# Overhead stuff
 zplug zplug/zplug, hook-build:"zplug --self-manage"
 zplug mafredri/zsh-async
-zplug "ahmedelgabri/pure", depth:1, use:"{async,pure}.zsh", as:theme
+
+# Theme
+zplug sindresorhus/pure, use:"{async,pure}.zsh", from:github, as:theme
+
+# Formatting and Syntax highlighting
+zplug "plugins/colored-man-pages", from:oh-my-zsh, defer:3
 zplug zdharma/fast-syntax-highlighting
-zplug molovo/tipz
+zplug chrissicool/zsh-256color
+
+# Reminders
+zplug molovo/tipz, defer:3
+
+# History searching
 zplug zsh-users/zsh-autosuggestions
 zplug zsh-users/zsh-history-substring-search
-zplug chrissicool/zsh-256color
+
+# Tab completion plugins
+zplug "plugins/kitchen", from:oh-my-zsh, defer:2
+zplug "plugins/docker", from:oh-my-zsh, defer:2
+zplug "plugins/knife", from:oh-my-zsh, defer:2
+zplug "plugins/terraform", from:oh-my-zsh, defer:2
 zplug "zsh-users/zsh-completions"
-zplug "paulirish/git-open", as:plugin
-zplug "plugins/colored-man-pages", from:oh-my-zsh
+
+# Web plugins
+zplug "paulirish/git-open", as:plugin, defer:3
+
+
+
+bindkey -v                                                      # Vim Mode, cause this is a vim shop
 
 if ! zplug check;  then
 	zplug install

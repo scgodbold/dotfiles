@@ -17,3 +17,5 @@ export PROJECT_DIR="${HOME}/repos/src"
 
 export DISABLE_AUTO_TITLE=true
 export GOPATH=${HOME}/repos/
+TIPZ_TEXT='Alias tip:'
+ZSH_AUTOSUGGEST_USE_ASYNC=true

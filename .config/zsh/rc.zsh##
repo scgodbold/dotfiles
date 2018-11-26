@@ -17,7 +17,6 @@ ZDOT_DIR="${HOME}/.config/zsh"
 
 source "${ZDOT_DIR}/tmux.zsh"
 source "${ZDOT_DIR}/zplug.zsh"
-source "${ZDOT_DIR}/ohmy.zsh"
 source "${ZDOT_DIR}/py_venv.zsh"
 source "${ZDOT_DIR}/env_vars.zsh"
 source "${ZDOT_DIR}/functions.zsh"
@@ -27,6 +26,9 @@ source "${ZDOT_DIR}/aliases.zsh"
 if [ -e "${ZDOT_DIR}/local.zsh" ]; then
     source "${ZDOT_DIR}/local.zsh"
 fi
+
+autoload -U promptinit
+promptinit
 
 # On more post load, themes didn't work till I did this
 zplug load
