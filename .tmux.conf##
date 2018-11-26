@@ -10,7 +10,8 @@
 #   02. Movements ............................................... |tmux_movements|
 #   03. Pane Manipulation  .......................................... |tmux_panes|
 #   04. Colorscheme ........................................... |tmux_colorscheme|
-#   04. Statusbar ............................................... |tmux_statusbar|
+#   05. Statusbar ............................................... |tmux_statusbar|
+#   06. Plugins ................................................... |tmux_plugins|
 
 # --------------------------------------------------------------------------------
 # 01. Base Settings                                                    *tmux_base*
@@ -109,3 +110,25 @@ set-option -g display-panes-colour colour196
 set -g @online_icon "ok"
 set -g @offline_icon "offline!"
 set -g status-right "Online: #{online_status} | %a %h-%d %H-%M"
+
+
+
+# --------------------------------------------------------------------------------
+# 06. Plugins                                                       *tmux_plugins*
+# --------------------------------------------------------------------------------
+set -g @plugin 'tmux-plugins/tpm'
+# Tmux Copy + open may go away if https://github.com/jwilm/alacritty/issues/1615
+# is ever resolved.
+#   For local reference all commands follow for prefix +
+#   Ctrl-f ...... file search
+#   Ctrl-g ...... git status searching
+#   Alt-h ....... sha1/sha256 search
+#   Ctrl-u ...... url search
+#   Ctrl-d ...... digit search
+#   Ctrl-i ...... IP Search
+set -g @plugin 'tmux-plugins/tmux-copycat'
+set -g @plugin 'tmux-plugins/tmux-open'
+
+
+# Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
+run -b '~/.tmux/plugins/tpm/tpm'
