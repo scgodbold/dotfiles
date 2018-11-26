@@ -3,10 +3,9 @@
 REPO_DIR="${HOME}/repos"
 OMZSH_DIR="${HOME}/.oh-my-zsh"
 
-install_ohmyzsh() {
-    if [ ! -d "${HOME}/.oh-my-zsh" ]; then
-        # Manual install as oh my zsh installer is pesky and tries to change things
-        git clone git://github.com/robbyrussell/oh-my-zsh.git "${OMZSH_DIR}"
+install_tmux_plugin_manager() {
+    if [ ! -d "${HOME}/.tmux/plugins/tpm" ]; then
+        git clone https://github.com/tmux-plugins/tpm ${HOME}/.tmux/plugins/tpm
     fi
 }
 
@@ -43,8 +42,8 @@ main() {
     build_directories
     install_pkgs
     install_pip_pkgs
-    install_ohmyzsh
     install_alacritty
+    install_tmux_plugin_manager
 }
 
 main

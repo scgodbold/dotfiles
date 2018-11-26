@@ -33,7 +33,9 @@ PIP_PKGS=(
 )
 
 function install_tmux_plugin_manager() {
-    git clone https://github.com/tmux-plugins/tpm ${HOME}/.tmux/plugins/tpm
+    if [ ! -d "${HOME}/.tmux/plugins/tpm" ]; then
+        git clone https://github.com/tmux-plugins/tpm ${HOME}/.tmux/plugins/tpm
+    fi
 }
 
 function install_ohmyzsh() {
@@ -84,7 +86,6 @@ function build_directories() {
 function main(){
     build_directories
     install_pkgs
-    install_ohmyzsh
     install_pip_pkgs
     install_alacritty
     install_tmux_plugin_manager

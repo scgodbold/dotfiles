@@ -25,6 +25,12 @@ PIP_PKGS=(
     "tmuxp"
 )
 
+function install_tmux_plugin_manager() {
+    if [ ! -d "${HOME}/.tmux/plugins/tpm" ]; then
+        git clone https://github.com/tmux-plugins/tpm ${HOME}/.tmux/plugins/tpm
+    fi
+}
+
 function install_brew() {
     # This will likely never be executed as brew is going to be used to install yadm but just in case
     if [ ! $(command -v brew) ]; then
@@ -32,20 +38,6 @@ function install_brew() {
     fi
     if [ ! $(brew tap | grep "caskroom/cask") ]; then
         brew tap caskroom/cask
-    fi
-}
-
-function install_ohmyzsh() {
-    if [ ! -d "${OMZSH_DIR}" ]; then
-        # Manual install as oh my zsh installer is pesky and tries to change things
-        git clone git://github.com/robbyrussell/oh-my-zsh.git "${OMZSH_DIR}"
-    fi
-    
-    # Install spaceship theme for ohmyzsh
-    spaceship_path="${OMZSH_DIR}/custom/themes"
-    if [ ! -e "${spaceship_path}/spaceship.zsh-theme" ]; then
-        mkdir -p "${spaceship_path}"
-        curl -o "${spaceship_path}/spaceship.zsh-theme" "https://raw.githubusercontent.com/denysdovhan/spaceship-zsh-theme/master/spaceship.zsh"
     fi
 }
 
@@ -86,9 +78,9 @@ function build_directories() {
 function main(){
     install_brew
     install_pkgs
-    install_ohmyzsh
     install_alacritty
     bootstrap_vim
+    install_tmux_plugin_manager() {
     build_directories
 }
 

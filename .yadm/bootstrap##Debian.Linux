@@ -29,6 +29,12 @@ PIP_PKGS=(
     "virtualenvwrapper"
 )
 
+function install_tmux_plugin_manager() {
+    if [ ! -d "${HOME}/.tmux/plugins/tpm" ]; then
+        git clone https://github.com/tmux-plugins/tpm ${HOME}/.tmux/plugins/tpm
+    fi
+}
+
 function install_ohmyzsh() {
     if [ ! -d "${HOME}/.oh-my-zsh" ]; then
         # Manual install as oh my zsh installer is pesky and tries to change things
@@ -79,6 +85,7 @@ function main(){
     install_ohmyzsh
     install_pip_pkgs
     install_alacritty
+    install_tmux_plugin_manager
     bootstrap_vim
 
     # Run the yadm alt program once envtpl is installed to complete the installation
