@@ -28,4 +28,3 @@ Currently YADM does not have a switch on the distro type for linux so I have use
 | Ubuntu | Sepficies the linux distribution as Ubuntu. |
 | Debian | Sepficies the linux distribution as Debian. |
 | Fedora | Sepficies the linux distribution as Fedora. |
-| Work | Specifies as a work computer. |
