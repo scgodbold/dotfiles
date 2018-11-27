@@ -29,3 +29,11 @@ bindkey '^R' history-incremental-search-backward            # Vim mode disables 
 # Project Movements
 alias pj="projectjump -b ${PROJECT_DIR}"
 alias pjg="projectjump -b ${PROJECT_DIR}/github.com"
+
+# General Traversal Improvements
+alias -g ..='cd ..'
+alias -g ...='cd ../..'
+alias -g ...='cd ../..'
+alias -g ....='cd ../../..'
+alias -g .....='cd ../../../..'
+alias -g ......='cd ../../../../..'

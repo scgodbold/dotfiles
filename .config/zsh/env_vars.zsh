@@ -18,5 +18,9 @@ export PROJECT_DIR="${HOME}/repos/src"
 export DISABLE_AUTO_TITLE=true
 export GOPATH=${HOME}/repos/
 export WORKON_HOME=${HOME}/.virtualenvs
-TIPZ_TEXT='Alias tip:'
-ZSH_AUTOSUGGEST_USE_ASYNC=true
+export TIPZ_TEXT='Alias tip:'
+export ZSH_AUTOSUGGEST_USE_ASYNC=true
+
+export HISTFILE=${HOME}/.zsh_history
+export HISTSIZE=50000
+export SAVEHIST=10000
