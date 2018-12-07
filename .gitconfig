@@ -12,13 +12,11 @@
     forcepush = push -f
     fixcommit = commit -m 'fixes'
     updatemaster = "!f() { cur_branch=$(git symbolic-ref --short HEAD); git checkout master; git pull origin master; git checkout $cur_branch; }; f"
-    draft = "!f() { [ \"$#\" -gt \"1\" ] && echo 'Usage: git draft [TOPIC]\n\n-- TOPIC set topic of the request' || topic=${1}; git push origin HEAD:refs/drafts/master;}; f"
+    draft = "!zsh -c \"gerrit_review -d $@\""
     review = "!f() { [ \"$#\" -gt \"1\" ] && echo 'Usage: git review [TOPIC]\n\n-- TOPIC set topic of the request' || topic=${1}; git push origin HEAD:refs/publish/master;}; f"
-    dev-review = "!f() { [ \"$#\" -gt \"1\" ] && echo 'Usage: git review [TOPIC]\n\n-- TOPIC set topic of the request' || topic=${1}; git push origin HEAD:refs/publish/develop;}; f"
+    dev-review = "_gerrit_review -d -b develop"
     dev-draft = "!f() { [ \"$#\" -gt \"1\" ] && echo 'Usage: git review [TOPIC]\n\n-- TOPIC set topic of the request' || topic=${1}; git push origin HEAD:refs/drafts/develop;}; f"
     amend = "commit --amend --no-edit"
-    st = "stash"
-    stp = "stash pop"
     amendAndReview = "!f() { git add -u; git amend; git review; };f"
 [core]
     excludesfile = ~/.gitignore

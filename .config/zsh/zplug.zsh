@@ -33,9 +33,8 @@ zplug "plugins/kitchen", from:oh-my-zsh, defer:2
 zplug "plugins/docker", from:oh-my-zsh, defer:2
 zplug "plugins/knife", from:oh-my-zsh, defer:2
 zplug "plugins/terraform", from:oh-my-zsh, defer:2
-zplug "plugins/git", from:oh-my-zsh, defer:2
 zplug "zsh-users/zsh-completions"
 
-# Web plugins
-zplug "paulirish/git-open", as:plugin, defer:3
+# Git plugins
+zplug "plugins/gitignore", from:oh-my-zsh, defer:2
 
