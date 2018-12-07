@@ -1,5 +1,6 @@
 export ZPLUG_HOME=${HOME}/.zplug
 
+# Self loads zplug on first run
 if [[ ! -f ${ZPLUG_HOME}/init.zsh ]]; then
     git clone https://github.com/zplug/zplug ${ZPLUG_HOME}
 	source ${ZPLUG_HOME}/init.zsh
@@ -38,10 +39,3 @@ zplug "zsh-users/zsh-completions"
 # Web plugins
 zplug "paulirish/git-open", as:plugin, defer:3
 
-
-
-bindkey -v                                                      # Vim Mode, cause this is a vim shop
-
-if ! zplug check;  then
-	zplug install
-fi

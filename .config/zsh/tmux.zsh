@@ -9,8 +9,7 @@
 #   * Created tmux module
 # ------------------------------------------------------------------------------------
 
-export TMUXP_CONFIGDIR=${HOME}/.config/tmuxp
-export DISABLE_AUTO_TITLE='true'
+export DISABLE_AUTO_TITLE=true
 local tmux_bin=$(which tmux)
 if [[ ! $TERM =~ screen ]]; then
     # I guess new is what I wanted here :/ whatever
