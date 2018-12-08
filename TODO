@@ -1,3 +1,4 @@
 * Figure out a better way to handle dependency installation
 * Look into moving away from monolithic vimrc to .vim instead
 * Look at switching to i3 from xfce
+* git Improvements (already in the works)
