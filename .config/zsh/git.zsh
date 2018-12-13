@@ -14,20 +14,25 @@ function _git_update_master () {
 
 alias g='git'
 
+alias gl='git pull'
 alias ga='git add'
 alias gau='git add --update'
 alias gaa='git add --all'
 
 alias gc='git commit -v'
 
+alias gst='git stash'
+alias gstp='git stash pop'
+
 alias gb='git branch'
 alias gp='git push'
 
 alias gco='git checkout'
 alias gcb='git checkout -b'
+alias gcm='git checkout master'
 
 alias gss='git status --short'
-alias gst='git status'
+alias gstl='git status'
 
 alias gsn='git shortlog -sn'
 
