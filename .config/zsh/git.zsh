@@ -97,3 +97,12 @@ EOF
 }
 
 alias gaar='git add -u && git commit --amend --no-edit && git review'
+
+
+# Add some yadm commands too since its mostly git
+alias yau='yadm add -u'
+alias yc='yadm commit'
+alias yp='yadm push'
+alias yl='yadm pull'
+alias yst='yadm stash'
+alias ystp='yadm stash pop'
