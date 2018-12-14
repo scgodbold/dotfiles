@@ -8,6 +8,7 @@ export PROJECT_DIR="${HOME}/repos/src"
 setopt auto_pushd
 setopt pushd_ignore_dups
 setopt pushdminus
+setopt autocd
 zstyle ':completion:*' menu select
 
 # General Traversal Improvements

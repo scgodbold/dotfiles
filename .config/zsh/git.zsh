@@ -15,17 +15,19 @@ function _git_update_master () {
 alias g='git'
 
 alias gl='git pull'
+alias gc='git commit -v'
+alias gb='git branch'
+alias gp='git push'
+alias gd='git diff'
+
 alias ga='git add'
 alias gau='git add --update'
 alias gaa='git add --all'
 
-alias gc='git commit -v'
 
 alias gst='git stash'
 alias gstp='git stash pop'
 
-alias gb='git branch'
-alias gp='git push'
 
 alias gco='git checkout'
 alias gcb='git checkout -b'
@@ -106,3 +108,4 @@ alias yp='yadm push'
 alias yl='yadm pull'
 alias yst='yadm stash'
 alias ystp='yadm stash pop'
+alias yd='yadm diff'
