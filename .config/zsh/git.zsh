@@ -102,6 +102,7 @@ alias gaar='git add -u && git commit --amend --no-edit && git review'
 
 
 # Add some yadm commands too since its mostly git
+alias yss='yadm status --short'
 alias yau='yadm add -u'
 alias yc='yadm commit'
 alias yp='yadm push'

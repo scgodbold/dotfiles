@@ -13,6 +13,8 @@ export WORKON_HOME=${HOME}/.virtualenvs
 export TIPZ_TEXT='Alias tip:'
 export ZSH_AUTOSUGGEST_USE_ASYNC=true
 
+alias be='bundle exec'
+
 # Set prompt in zsh
 autoload -U promptinit
 promptinit
