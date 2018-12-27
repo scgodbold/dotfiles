@@ -211,8 +211,8 @@ mouse:
   # scrolling for applications like `man`.
   #
   # To disable this completely, set `faux_scrollback_lines` to 0.
-  url:
-    launcher: xdg-open
+  # url:
+  #   launcher: xdg-open
   hide_when_typing: true
 
 scrolling:

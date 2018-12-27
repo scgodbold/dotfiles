@@ -37,29 +37,27 @@
 " -----------------------------------------------------------------------
 " 01. Plugin Settings                                     *plugin_config*
 " -----------------------------------------------------------------------
-set nocompatible				            " Make this thing uncompatiable with vi because this is vim goddamnit
-
 " download vim-plug if missing
-if empty(glob("~/.vim/autoload/plug.vim"))
+if empty(glob('~/.vim/autoload/plug.vim'))
     silent! execute '!curl --create-dirs -fsSLo ~/.vim/autoload/plug.vim https://raw.github.com/junegunn/vim-plug/master/plug.vim'
-    autocmd VimEnter * silent! PlugInstall
+    augroup pluginstaller
+        autocmd VimEnter * silent! PlugInstall
+    augroup END
 endif
 
 call plug#begin('~/.vim/plugged')    		" Define plugins
 
 " Plug 'w0ng/vim-hybrid'                    " My fallback colorscheme, always a good choice
 Plug 'alessandroyorba/sierra'               " Sierra colors, the new hotness
-Plug 'scrooloose/syntastic'                 " all the syntax checking
 Plug 'itchyny/lightline.vim'                " A lighter status line than airline
 Plug 'christoomey/vim-tmux-navigator'       " Make vim and tmux play together
 Plug 'nathanaelkane/vim-indent-guides'      " This should help me view the indent levels
-Plug 'tweekmonster/braceless.vim'           " Braceless vim for better python folding & movement
 Plug 'tpope/vim-fugitive'                   " Need git access from vim
 Plug 'tpope/vim-vinegar'                    " File navigation
 Plug 'tpope/vim-commentary'                 " File navigation
+Plug 'tpope/vim-dispatch'                 " File navigation
 Plug 'hashivim/vim-terraform'               " Terraform formating
 Plug 'fatih/vim-go'                         " Support go development
-Plug 'pprovost/vim-ps1'                     " Support powershell when I have to use it
 Plug 'saltstack/salt-vim'                   " Enable salt support
 
 call plug#end()   				            " end vundle managed plugins
@@ -68,7 +66,6 @@ call plug#end()   				            " end vundle managed plugins
 " 02. Colors                                               *color_scheme*
 " -----------------------------------------------------------------------
 set background=dark		                " All about the dark terminals
-set t_Co=256			                " And 256 bit color schemes
 syntax enable			                " Enable Syntax Highlighting
 silent! colorscheme sierra              " our colorscheme definition
 
@@ -90,17 +87,25 @@ set shiftwidth=4		" Sets spaces shifted when using [<<] or [>>]
 set expandtab			" Tabs are now spaces pahhh
 set smarttab            " Smart tab handling for indenting
 set smartindent         " ^ See above
-set backspace=2         " Apparently this is needed for deleting new lines
+
+" Delete all the things
+set backspace+=eol      " end of lines
+set backspace+=indent   " autoindent tabs
+set backspace+=start    " the start of current insertion
 
 " Vim Indent Guides, useful for python and stuff
 let g:indent_guides_auto_colors = 0                             " No Auto Color Detection
 let g:indent_guides_guide_size = 1                              " Thin guides
-autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd ctermbg=238  " Declare custom even line color
-autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=240 " Declare custom odd line color
+augroup indentguides
+    autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd ctermbg=238  " Declare custom even line color
+    autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=240 " Declare custom odd line color
+augroup END
 let g:indent_guides_enable_on_vim_startup = 1                   " Lets have this on by default, <leader>ig to disable
 
 " Strip away trailing whitespace from all files
-autocmd BufWritePre * :%s/\s\+$//e
+augroup stripwhitespace
+    autocmd BufWritePre * :%s/\s\+$//e
+augroup END
 
 " -----------------------------------------------------------------------
 " 04. UI Configuration                                        *ui_config*
@@ -124,9 +129,6 @@ set hlsearch                        " highlight matches
 set ignorecase                      " case insensitive searching
 set smartcase                       " unless we want case
 
-" Ctrl-p settings
-set wildignore+=*.pyc,.git/*,*.swp  " Custom ignore files
-
 " Ignore files in gitignore and use silver searcher if able
 if executable('ag')
     set grepprg=ag\ --nogroup\ --nocolor
@@ -139,12 +141,6 @@ set foldenable          " I want to fold
 set foldlevelstart=5    " Show most of the folds to begin with
 set foldlevel=99        " Gimme all dem folds
 set foldmethod=indent   " Fold on indent levels
-
-" Braceless for maybe even better folding & indententing
-autocmd FileType python BracelessEnable +indent +fold
-
-autocmd BufEnter *.py.erb BracelessEnable +indent +fold
-
 
 " -----------------------------------------------------------------------
 " 07. Key Bindings                                            *key_binds*
@@ -228,89 +224,48 @@ nnoremap <silent> <leader><leader> :ZoomToggle<CR>
 " 10. Autogroups                                       *autogroup_config*
 " -----------------------------------------------------------------------
 " 4 space tabs for python scripts
-autocmd FileType python setlocal tabstop=4
-autocmd FileType python setlocal shiftwidth=4
+" autocmd FileType python setlocal tabstop=4
+" autocmd FileType python setlocal shiftwidth=4
 
 " 2 space tabs for shell scripts
-autocmd BufEnter *.sh setlocal tabstop=2
-autocmd BufEnter *.sh setlocal shiftwidth=2
-autocmd BufEnter *.sh setlocal softtabstop=2
+" autocmd BufEnter *.sh setlocal tabstop=2
+" autocmd BufEnter *.sh setlocal shiftwidth=2
+" autocmd BufEnter *.sh setlocal softtabstop=2
 
-" 2 space tabs for yaml scripts
-autocmd BufEnter *.yml setlocal tabstop=2
-autocmd BufEnter *.yml setlocal shiftwidth=2
-autocmd BufEnter *.yml setlocal softtabstop=2
-autocmd BufEnter *.yaml setlocal tabstop=2
-autocmd BufEnter *.yaml setlocal shiftwidth=2
-autocmd BufEnter *.yaml setlocal softtabstop=2
+" " 2 space tabs for yaml scripts
+" autocmd BufEnter *.yml setlocal tabstop=2
+" autocmd BufEnter *.yml setlocal shiftwidth=2
+" autocmd BufEnter *.yml setlocal softtabstop=2
+" autocmd BufEnter *.yaml setlocal tabstop=2
+" autocmd BufEnter *.yaml setlocal shiftwidth=2
+" autocmd BufEnter *.yaml setlocal softtabstop=2
 
-" Python syntax for .py.erb
-autocmd BufEnter *.sh.erb set syntax=sh
+" " Python syntax for .py.erb
+" autocmd BufEnter *.sh.erb set syntax=sh
 
-" Python syntax for .py.erb
-autocmd BufEnter *.py.erb setlocal syntax=python
-
-" Make requires tabs, so lets set that
-autocmd FileType make setlocal noexpandtab
+" " Python syntax for .py.erb
+" autocmd BufEnter *.py.erb setlocal syntax=python
 
 " Autoformat terrform files on save
 let g:terraform_fmt_on_save=1
 let g:terraform_align=1
 
 " Ruby tabs
-autocmd FileType ruby setlocal tabstop=2
-autocmd FileType ruby setlocal shiftwidth=2
-autocmd FileType ruby setlocal softtabstop=2
-
-" -----------------------------------------------------------------------
-" 11. Syntastic Settings                               *syntastic_config*
-" -----------------------------------------------------------------------
-set statusline+=%#warningmsg#                   " Syntastic Recommended
-set statusline+=%{SyntasticStatuslineFlag()}    " Syntastic Recommended
-set statusline+=%*                              " Syntastic Recommended
-
-let g:syntastic_always_populate_loc_list = 1    " Syntastic Recommended
-let g:syntastic_auto_loc_list = 1               " Syntastic Recommended
-let g:syntastic_check_on_open = 0               " Syntastic Recommended
-let g:syntastic_check_on_wq = 0                 " Syntastic Recommended
-let g:syntastic_mode_map = { 'mode': 'passive'}  " Enable syntastic mode, going to be used for toggling
-
-" Get ride of some annoying python errors I dont like/arent working (import errors, no-members) I am looking at you
-let g:syntastic_python_pylint_quiet_messages = {'level': ['warning'], 'regex': ['import-error', 'no-member']}
-
-" Give us the option to hide and show syntastic
-function! ToggleSyntastic()
-    if(g:syntastic_mode_map['mode'] == 'active')
-        call SyntasticToggleMode()
-    else
-        call SyntasticToggleMode()
-        call SyntasticCheck()
-    endif
-endfunction
-nnoremap <leader>h :call ToggleSyntastic()<CR>
+" autocmd FileType ruby setlocal tabstop=2
+" autocmd FileType ruby setlocal shiftwidth=2
+" autocmd FileType ruby setlocal softtabstop=2
 
 " -----------------------------------------------------------------------
 " 12. Backups & Undos                                     *backups_undos*
 " -----------------------------------------------------------------------
-" Set the backup directory and ensure that it exists
-if !isdirectory($HOME . "/.vim/.backup")
-    call mkdir($HOME . "/.vim/.backup", "p")
-endif
-set backupdir=~/.vim/.backup//
-
-" Set the undo directory and ensure that it exists
-if !isdirectory($HOME . "/.vim/.undo")
-    call mkdir($HOME . "/.vim/.undo", "p")
-endif
-set undodir=~/.vim/.undo//
-
-" Set the swap directory and ensure that it exists
-if !isdirectory($HOME . "/.vim/.swap")
-    call mkdir($HOME . "/.vim/.swap", "p")
-endif
-set directory=~/.vim/.swap//
+set backupdir=~/.vim/cache/backup//
+set undodir=~/.vim/cache/undo//
+set directory=~/.vim/cache/swap//
 
 
 set undofile                " persistent undo == $$$$
 let undolevels=500          " undo all the things
 let undoreload=500          " and the reload
+
+" Local Vim environment uses this to tell it to build on write
+let g:autocheck_onwrite = 1
