@@ -70,7 +70,22 @@ augroup filetypedectect
         \,gitconfig
         \ setfiletype gitconfig
 
-    autocmd BufNewFIle,BufRead
+    autocmd BufNewFile,BufRead
         \ ?*.go
         \ setfiletype go
+
+    autocmd BufNewFile,BufRead
+        \ ?*.sh
+        \,$ENV
+        \,.profile
+        \,.shinit
+        \,.shrc
+        \,.xinitrc
+        \,/etc/default/*
+        \,configure
+        \,profile
+        \,shinit
+        \,shrc
+        \,xinitrc
+        \ setfiletype sh
 augroup END

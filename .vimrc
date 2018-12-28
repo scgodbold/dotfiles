@@ -223,16 +223,6 @@ nnoremap <silent> <leader><leader> :ZoomToggle<CR>
 " -----------------------------------------------------------------------
 " 10. Autogroups                                       *autogroup_config*
 " -----------------------------------------------------------------------
-" 4 space tabs for python scripts
-" autocmd FileType python setlocal tabstop=4
-" autocmd FileType python setlocal shiftwidth=4
-
-" 2 space tabs for shell scripts
-" autocmd BufEnter *.sh setlocal tabstop=2
-" autocmd BufEnter *.sh setlocal shiftwidth=2
-" autocmd BufEnter *.sh setlocal softtabstop=2
-
-" " 2 space tabs for yaml scripts
 " autocmd BufEnter *.yml setlocal tabstop=2
 " autocmd BufEnter *.yml setlocal shiftwidth=2
 " autocmd BufEnter *.yml setlocal softtabstop=2
