@@ -1,21 +1,7 @@
 " Config for vim
 "
 " Author: Scott Godbold
-" Last Update: January 7, 2018
 "
-" Important Notes:
-"   Make sure all bindings involving <leader> go in the Leader Bindings section
-"   Failure to do so will mean the binding will not work as it will be before
-"   the leader was even declared
-
-" Changelog:
-"
-"   2018.1.7
-"       * Switched to vimplug from vundle
-"       * Autocreate directories on start that are required by vim
-"       * Remove jk/kj hot mappings, caused issues
-"
-
 " -----------------------------------------------------------------------
 
 " Table of Contents                                            *contents*
@@ -27,11 +13,7 @@
 "   05. Searching ....................................... |search_config|
 "   06. Folding ........................................ |folding_config|
 "   07. Key Bindings ........................................ |key_binds|
-"   08. Leader Bindings .................................. |leader_binds|
-"   09. Custom Functions ................................. |custom_funcs|
-"   10. Autogroups ................................... |autogroup_config|
-"   11. Syntastic Settings ........................... |syntastic_config|
-"   12. Backups & Undos ................................. |backups_undos|
+"   08. Backups & Undos ................................. |backups_undos|
 
 
 " -----------------------------------------------------------------------
@@ -61,6 +43,13 @@ Plug 'fatih/vim-go'                         " Support go development
 Plug 'saltstack/salt-vim'                   " Enable salt support
 
 call plug#end()   				            " end vundle managed plugins
+
+" Autoformat terrform files on save
+let g:terraform_fmt_on_save=1
+let g:terraform_align=1
+
+" Local Vim environment uses this to tell it to build on write
+let g:autocheck_onwrite = 1
 
 " -----------------------------------------------------------------------
 " 02. Colors                                               *color_scheme*
@@ -145,6 +134,8 @@ set foldmethod=indent   " Fold on indent levels
 " -----------------------------------------------------------------------
 " 07. Key Bindings                                            *key_binds*
 " -----------------------------------------------------------------------
+let mapleader=' '
+
 " move visually vertically not by line by default
 nnoremap <expr> j v:count ? (v:count > 5 ? "m'" . v:count : '') . 'j' : 'gj'
 nnoremap <expr> k v:count ? (v:count > 5 ? "m'" . v:count : '') . 'k' : 'gk'
@@ -166,15 +157,18 @@ nnoremap ; :
 " Remove command window, I dont find it useful for my work flow
 nnoremap q: :q
 
-" -----------------------------------------------------------------------
-" 08. Leader Bindings                                      *leader_binds*
-" -----------------------------------------------------------------------
-let mapleader=' '
+" toggle showing hidden charecters
+nnoremap <leader>l :setlocal list! list?<CR>
 
-" Edit the vimrc, and zshrc from anywhere, also source em
-nnoremap <leader>ev :vsp $MYVIMRC<CR>
-nnoremap <leader>ez :vsp ~/.zshrc<CR>
-nnoremap <leader>sv :source $MYVIMRC<CR>
+" sources vim
+nnoremap <leader>r :source $MYVIMRC<CR>
+
+" toggles line numbers showing
+nnoremap <leader>n :setlocal number! number?<CR>
+
+" toggles paste mode
+nnoremap <leader>p :setlocal paste! paste?<CR>
+
 
 " Allow for <leader>\ and <leader>- to open vimsplits
 nnoremap <leader>\ :vsplit<CR>
@@ -189,64 +183,17 @@ nnoremap <leader>f za
 " I want a redraw keybinding
 nnoremap <leader>r :redraw!<CR>
 
-" -----------------------------------------------------------------------
-" 09. Custom Functions                                     *custom_funcs*
-" -----------------------------------------------------------------------
-" Switches between relative and absolute numbering
-function! ToggleNumber()
-    if(&relativenumber == 1)
-        set norelativenumber
-        set number
-    else
-        set relativenumber
-    endif
-endfunc
-" Give that a key binding (Tab twice)
-nnoremap <tab><tab> :call ToggleNumber()<CR>
+" Show marks
+nnoremap <leader>m :marks<CR>
 
-" zoom in on a specific window, then zoom back out
-function! s:ZoomToggle() abort
-    if exists('t:zoomed') && t:zoomed
-        execute t:zoom_winrestcmd
-        let t:zoomed=0
-    else
-        let t:zoom_winrestcmd = winrestcmd()
-        resize
-        vertical resize
-        let t:zoomed=1
-    endif
-endfunction
-command! ZoomToggle call s:ZoomToggle()
-" bind it to <leader><leader>
-nnoremap <silent> <leader><leader> :ZoomToggle<CR>
+" Show current filetype
+nnoremap <leader>t :setlocal filetype?<CR>
+
+" Change current directory to current files directory
+nnoremap <leader>g :cd %:h<CR>:pwd<CR>
 
 " -----------------------------------------------------------------------
-" 10. Autogroups                                       *autogroup_config*
-" -----------------------------------------------------------------------
-" autocmd BufEnter *.yml setlocal tabstop=2
-" autocmd BufEnter *.yml setlocal shiftwidth=2
-" autocmd BufEnter *.yml setlocal softtabstop=2
-" autocmd BufEnter *.yaml setlocal tabstop=2
-" autocmd BufEnter *.yaml setlocal shiftwidth=2
-" autocmd BufEnter *.yaml setlocal softtabstop=2
-
-" " Python syntax for .py.erb
-" autocmd BufEnter *.sh.erb set syntax=sh
-
-" " Python syntax for .py.erb
-" autocmd BufEnter *.py.erb setlocal syntax=python
-
-" Autoformat terrform files on save
-let g:terraform_fmt_on_save=1
-let g:terraform_align=1
-
-" Ruby tabs
-" autocmd FileType ruby setlocal tabstop=2
-" autocmd FileType ruby setlocal shiftwidth=2
-" autocmd FileType ruby setlocal softtabstop=2
-
-" -----------------------------------------------------------------------
-" 12. Backups & Undos                                     *backups_undos*
+" 08. Backups & Undos                                     *backups_undos*
 " -----------------------------------------------------------------------
 set backupdir=~/.vim/cache/backup//
 set undodir=~/.vim/cache/undo//
@@ -256,6 +203,3 @@ set directory=~/.vim/cache/swap//
 set undofile                " persistent undo == $$$$
 let undolevels=500          " undo all the things
 let undoreload=500          " and the reload
-
-" Local Vim environment uses this to tell it to build on write
-let g:autocheck_onwrite = 1
