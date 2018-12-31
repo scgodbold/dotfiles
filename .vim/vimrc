@@ -37,7 +37,7 @@ Plug 'nathanaelkane/vim-indent-guides'      " This should help me view the inden
 Plug 'tpope/vim-fugitive'                   " Need git access from vim
 Plug 'tpope/vim-vinegar'                    " File navigation
 Plug 'tpope/vim-commentary'                 " File navigation
-Plug 'tpope/vim-dispatch'                 " File navigation
+Plug 'tpope/vim-dispatch'                   " File navigation
 Plug 'hashivim/vim-terraform'               " Terraform formating
 Plug 'fatih/vim-go'                         " Support go development
 Plug 'saltstack/salt-vim'                   " Enable salt support
