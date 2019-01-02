@@ -161,7 +161,7 @@ nnoremap q: :q
 nnoremap <leader>l :setlocal list! list?<CR>
 
 " sources vim
-nnoremap <leader>r :source $MYVIMRC<CR>
+nnoremap <leader>R :source $MYVIMRC<CR>
 
 " toggles line numbers showing
 nnoremap <leader>n :setlocal number! number?<CR>
@@ -180,11 +180,11 @@ nnoremap <leader>c :nohlsearch<CR>
 " Make folding and unfolding easier w/ space
 nnoremap <leader>f za
 
-" I want a redraw keybinding
-nnoremap <leader>r :redraw!<CR>
-
 " Show marks
 nnoremap <leader>m :marks<CR>
+
+" Show registers
+nnoremap <leader>r :registers<CR>
 
 " Show current filetype
 nnoremap <leader>t :setlocal filetype?<CR>

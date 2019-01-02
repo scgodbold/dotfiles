@@ -88,4 +88,17 @@ augroup filetypedectect
         \,shrc
         \,xinitrc
         \ setfiletype sh
+
+    autocmd BufNewFile,BufRead
+        \ ?*.groovy
+        \ setfiletype groovy
+
+    autocmd BufNewFile,BufRead
+        \ ?*.diff
+        \ setfiletype diff
+
+    autocmd BufNewFile,BufRead
+        \ ?*.tf
+        \,?*.tfvars
+        \ setfiletype terraform
 augroup END
