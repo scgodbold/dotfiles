@@ -15,7 +15,6 @@
 "   07. Key Bindings ........................................ |key_binds|
 "   08. Backups & Undos ................................. |backups_undos|
 
-
 " -----------------------------------------------------------------------
 " 01. Plugin Settings                                     *plugin_config*
 " -----------------------------------------------------------------------
@@ -139,14 +138,6 @@ let mapleader=' '
 " move visually vertically not by line by default
 nnoremap <expr> j v:count ? (v:count > 5 ? "m'" . v:count : '') . 'j' : 'gj'
 nnoremap <expr> k v:count ? (v:count > 5 ? "m'" . v:count : '') . 'k' : 'gk'
-
-" Making going to the start and of the line easier
-nnoremap B ^
-nnoremap E $
-
-" And get ride of old bindings to break habbits
-nnoremap $ <nop>
-nnoremap ^ <nop>
 
 " Highlight last inserted text
 nnoremap gV `[v`]

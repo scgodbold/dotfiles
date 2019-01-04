@@ -20,3 +20,8 @@
     amendAndReview = "!f() { git add -u; git amend; git review; };f"
 [core]
     excludesfile = ~/.gitignore
+    pager = less -S
+[init]
+    templatedir = ~/.git_template
+[include]
+    path = .gitconfig.local

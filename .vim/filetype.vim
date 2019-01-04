@@ -7,7 +7,13 @@ if !has('autocmd') || &compatible
     finish
 endif
 
-augroup filetypedectect
+function! s:CheckShebang()
+    if line('''[') == 1 && getline(1) =~# '^#!'
+        doautocmd filetypedetect BufRead
+    endif
+endfunction
+
+augroup filetypedetect
     autocmd BufNewFile,BufRead
         \ ?*.py
         \ setfiletype python
@@ -101,4 +107,16 @@ augroup filetypedectect
         \ ?*.tf
         \,?*.tfvars
         \ setfiletype terraform
+
+    " Run last, to try and determine filetype
+    " from the first line of the script
+    autocmd BufNewFile,BufRead,StdinReadPost
+        \ *
+        \ if !did_filetype()
+        \|  runtime scripts.vim
+        \|endif
+
+    if v:version > 700
+        autocmd InsertLeave * call s:CheckShebang()
+    endif
 augroup END
