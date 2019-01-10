@@ -108,6 +108,21 @@ augroup filetypedetect
         \,?*.tfvars
         \ setfiletype terraform
 
+    " .dash files are for gerrit dashboard creation, uses ini filetype
+    autocmd BufNewFile,BufRead
+        \ ?*.ini
+        \,?*.dash
+        \ setfiletype dosini
+
+    autocmd BufNewFile,BufRead
+        \ ?*.ts
+        \ setfiletype typescript
+
+    autocmd BufNewFile,BufRead
+        \ ?*.sls
+        \,SaltFile
+        \ setfiletype sls
+
     " Run last, to try and determine filetype
     " from the first line of the script
     autocmd BufNewFile,BufRead,StdinReadPost
