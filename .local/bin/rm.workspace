@@ -1,17 +1,42 @@
 #!/bin/bash
+
+function kill_workspace(){
+  workspace=$1
+  current=$2
+  switch_space=$3
+  if [[ "${current}" = "true" ]]; then
+    ${tmux} switch-client -t "${switch_space}"
+  fi
+  ${tmux} kill-session -t "${workspace}"
+}
+
 if [ -z "${1}" ]; then
-    echo "Must specify the name of the workspace to delete"
-    exit 1
+  echo "No workspace specified, defaulting to current workspace"
+  workspace="$(tmux display-message -p '#S')"
+  current_workspace=true
+else
+  workspace="${1}"
+  current_workspace=false
 fi
 
-workspace="${1}"
-tmux=$(which tmux)
+fallback_space="${DEFAULT_WORKSPACE:-default}"
+tmux=$(command -v tmux)
 
-${tmux} has -t ${workspace} 2> /dev/null
+${tmux} has -t "${workspace}" 2> /dev/null
 exists="${?}"
 if [ "${exists}" != "0" ]; then
-    echo "${workspace} does not exist"
-    exit 1
+  echo "${workspace} does not exist"
+  exit 1
 fi
 
-${tmux} kill-session -t ${workspace}
+echo "Are you sure you want to delete workspace: ${workspace}?  [y/n]"
+read -r answer
+
+case ${answer} in
+  y|Y|yes|Yes|YES)
+    kill_workspace "${workspace}" "${current_workspace}" "${fallback_space}"
+    ;;
+  *)
+    echo "Aborting"
+    ;;
+esac
