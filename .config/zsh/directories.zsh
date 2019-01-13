@@ -1,5 +1,6 @@
 ### Directory Defaults
 
+os="$(uname -s)"
 # Export directories and path
 export PATH=${PATH}:/usr/local/bin:${HOME}/.local/bin:${HOME}/.bin:${HOME}/bin
 export PROJECT_DIR="${HOME}/repos/src"
@@ -18,9 +19,15 @@ alias -g .....='../../../..'
 alias -g ......='../../../../..'
 
 # Shorten some common ls tasks
-alias ls='ls --color=auto'
-alias ll='ls -lhtr --color=auto'
-alias la='ls -lhatr --color=auto'
+if [[ "${os}" = "Darwin" ]]; then
+    alias ls='ls -G'
+    alias ll='ls -lhtrG'
+    alias la='ls -lhatrG'
+else
+    alias ls='ls --color=auto'
+    alias ll='ls -lhtr --color=auto'
+    alias la='ls -lhatr --color=auto'
+fi
 
 # Define faster movement within projects via project jump
 projectjump () {
