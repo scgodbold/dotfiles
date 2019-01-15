@@ -65,6 +65,11 @@ silent! colorscheme sierra              " our colorscheme definition
 hi Normal ctermbg=none
 hi NonText ctermbg=none
 
+" Fade text on unfocused windows
+if has('nvim-0.2.2')
+   hi NormalNC ctermfg=darkgray
+endif
+
 " Set lightline colorscheme
 let g:lightline = {
             \ 'colorscheme': 'wombat',
