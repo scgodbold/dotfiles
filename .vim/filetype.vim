@@ -20,6 +20,7 @@ augroup filetypedetect
 
     autocmd BufNewFile,BufRead
         \ ?*.rb
+        \,Gemfile
         \ setfiletype ruby
 
     autocmd BufNewFile,BufRead
