@@ -38,6 +38,7 @@ Plug 'tpope/vim-fugitive'                   " Need git access from vim
 Plug 'tpope/vim-vinegar'                    " File navigation
 Plug 'tpope/vim-commentary'                 " File navigation
 Plug 'tpope/vim-dispatch'                   " File navigation
+Plug 'tpope/vim-eunuch'                     " File navigation
 
 " Filetype specific plugins
 Plug 'hashivim/vim-terraform', { 'for': 'terraform' }                " Terraform formating
