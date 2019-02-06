@@ -1,0 +1,134 @@
+# Tmux Config
+#
+# Author: Scott Godbold Last Update: January 7, 2018 Changelog: 2018.1.7
+#       * Fix mouse issues on tmux first run
+# --------------------------------------------------------------------------------
+
+# Table of Contents                                                     *contents*
+
+#   01. Base Settings ................................................ |tmux_base|
+#   02. Movements ............................................... |tmux_movements|
+#   03. Pane Manipulation  .......................................... |tmux_panes|
+#   04. Colorscheme ........................................... |tmux_colorscheme|
+#   05. Statusbar ............................................... |tmux_statusbar|
+#   06. Plugins ................................................... |tmux_plugins|
+
+# --------------------------------------------------------------------------------
+# 01. Base Settings                                                    *tmux_base*
+# --------------------------------------------------------------------------------
+# Set tmux default shell
+set-option -g default-shell /bin/zsh
+
+# Declare Ctrl-a as prefix
+set -g prefix C-a
+bind C-a send-prefix
+
+# Unbind the old prefix
+unbind C-b
+
+# Send prefix for nested sessions
+bind-key a send-prefix
+
+# onto vim mode
+set-option -g status-keys vi
+set-window-option -g mode-keys vi
+
+# Escape key was being delayed in neovim from tmux
+set -sg escape-time 0
+
+# --------------------------------------------------------------------------------
+# 02. Movements                                                   *tmux_movements*
+# --------------------------------------------------------------------------------
+# Integration w/ vim so ctrl+<h/j/k/l> will switch between tmux and vim panes flawlessly
+is_vim='echo "#{pane_current_command}" | grep -iqE "(^|\/)g?(view|n?vim?x?)(diff)?$"'
+bind -n C-h if-shell "$is_vim" "send-keys C-h" "select-pane -L"
+bind -n C-j if-shell "$is_vim" "send-keys C-j" "select-pane -D"
+bind -n C-k if-shell "$is_vim" "send-keys C-k" "select-pane -U"
+bind -n C-l if-shell "$is_vim" "send-keys C-l" "select-pane -R"
+bind -n C-\ if-shell "$is_vim" "send-keys C-\\" "select-pane -l"
+# Double prefix hops to last focused window
+bind C-a last-window
+
+# Toggle pane sync, useful for multihost debugging
+bind C-p setw synchronize-panes
+
+# --------------------------------------------------------------------------------
+# 03. Pane Manipulation                                               *tmux_panes*
+# --------------------------------------------------------------------------------
+# Resizing w/ vim controls
+bind -r H resize-pane -L 5
+bind -r J resize-pane -D 5
+bind -r K resize-pane -U 5
+bind -r L resize-pane -R 5
+
+# Split the window vertically/horizontally w/ <prefix>+<\>/<->
+bind \ split-window -h -c "#{pane_current_path}"
+bind - split-window -v -c "#{pane_current_path}"
+bind c new-window -c "#{pane_current_path}"
+
+# Prevent the pane from renaming itself since they would all be zsh
+set-option -g allow-rename off
+
+# --------------------------------------------------------------------------------
+# 04. Colorscheme                                               *tmux_colorscheme*
+# --------------------------------------------------------------------------------
+# This section needs work
+# Sets truecolor support in tmux
+set-option -ga terminal-overrides ",xterm-256color:Tc"
+
+# Statusbar defaults
+set-option -g status-bg colour235
+set-option -g status-fg colour130
+set-option -g status-attr default
+
+# Window Title Defaults
+set-window-option -g window-status-fg colour33
+set-window-option -g window-status-bg default
+
+# active window title colors
+set-window-option -g window-status-current-fg colour196
+set-window-option -g window-status-current-bg default
+#set-window-option -g window-status-current-attr bright
+
+# Pane border colors
+set-option -g pane-border-fg colour130
+set-option -g pane-active-border-fg colour130
+
+# message text colors
+set-option -g message-bg colour235
+set-option -g message-fg colour196
+
+# pane number display colors
+set-option -g display-panes-active-colour colour20
+set-option -g display-panes-colour colour196
+
+# --------------------------------------------------------------------------------
+# 05. Statusbar                                                   *tmux_statusbar*
+# --------------------------------------------------------------------------------
+
+# Set status bars
+set -g @online_icon "ok"
+set -g @offline_icon "offline!"
+set -g status-right "Online: #{online_status} | %a %h-%d %H-%M"
+
+
+
+# --------------------------------------------------------------------------------
+# 06. Plugins                                                       *tmux_plugins*
+# --------------------------------------------------------------------------------
+set -g @plugin 'tmux-plugins/tpm'
+# Tmux Copy + open may go away if https://github.com/jwilm/alacritty/issues/1615
+# is ever resolved.
+#   For local reference all commands follow for prefix +
+#   Ctrl-f ...... file search
+#   Ctrl-g ...... git status searching
+#   Alt-h ....... sha1/sha256 search
+#   Ctrl-u ...... url search
+#   Ctrl-d ...... digit search
+#   Ctrl-i ...... IP Search
+set -g @plugin 'tmux-plugins/tmux-copycat'
+set -g @plugin 'tmux-plugins/tmux-open'
+
+
+# Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
+run -b '~/.tmux/plugins/tpm/tpm'
