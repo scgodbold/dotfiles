@@ -193,6 +193,9 @@ nnoremap <leader>t :setlocal filetype?<CR>
 " Change current directory to current files directory
 nnoremap <leader>g :cd %:h<CR>:pwd<CR>
 
+" Rebalance Vim splits, sometimes zoom can leave it in a funky state
+nnoremap <leader>= <C-W>=
+
 " -----------------------------------------------------------------------
 " 08. Backups & Undos                                     *backups_undos*
 " -----------------------------------------------------------------------
