@@ -168,7 +168,7 @@ nnoremap <leader>R :source $MYVIMRC<CR>
 nnoremap <leader>n :setlocal number! number?<CR>
 
 " toggles paste mode
-nnoremap <leader>p :setlocal paste! paste?<CR>
+nnoremap <leader>P :setlocal paste! paste?<CR>
 
 
 " Allow for <leader>\ and <leader>- to open vimsplits
@@ -188,13 +188,23 @@ nnoremap <leader>m :marks<CR>
 nnoremap <leader>r :registers<CR>
 
 " Show current filetype
-nnoremap <leader>t :setlocal filetype?<CR>
+nnoremap <leader>T :setlocal filetype?<CR>
 
 " Change current directory to current files directory
 nnoremap <leader>g :cd %:h<CR>:pwd<CR>
 
 " Rebalance Vim splits, sometimes zoom can leave it in a funky state
 nnoremap <leader>= <C-W>=
+
+" Some tag niceities
+" Show preview of matching tag
+nnoremap <leader>tp <C-w>}
+" jump to matching tag pushing previous spot onto the stack
+nnoremap <leader>tf <C-]>
+" jump up the tag stack 1 position
+nnoremap <leader>tb <C-t>
+" Close preview window
+nnoremap <leader>tc <C-w>z
 
 " -----------------------------------------------------------------------
 " 08. Backups & Undos                                     *backups_undos*
