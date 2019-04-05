@@ -198,13 +198,13 @@ nnoremap <leader>= <C-W>=
 
 " Some tag niceities
 " Show preview of matching tag
-nnoremap <leader>tp <C-w>}
+nnoremap <leader>p <C-w>}
 " jump to matching tag pushing previous spot onto the stack
-nnoremap <leader>tf <C-]>
+nnoremap <leader>v <C-]>
 " jump up the tag stack 1 position
-nnoremap <leader>tb <C-t>
+nnoremap <leader>b <C-t>
 " Close preview window
-nnoremap <leader>tc <C-w>z
+nnoremap <leader>x <C-w>z
 
 " -----------------------------------------------------------------------
 " 08. Backups & Undos                                     *backups_undos*
