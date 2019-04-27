@@ -48,7 +48,7 @@ function install_pkgs() {
 }
 
 function install_pip_pkgs() {
-    sudo pip install $(printf ' %s' ${PIP_PKGS[@]})
+    pip3 install --user $(printf ' %s' ${PIP_PKGS[@]})
 }
 
 function bootstrap_vim() {
@@ -75,16 +75,12 @@ function install_alacritty() {
 }
 
 function build_directories() {
-    mkdir -p ${REPO_DIR}/py
-    mkdir -p ${REPO_DIR}/go
+    mkdir -p ${REPO_DIR}/src
 }
 
 function main(){
     build_directories
-    install_pkgs
-    install_ohmyzsh
     install_pip_pkgs
-    install_alacritty
     install_tmux_plugin_manager
     bootstrap_vim
 

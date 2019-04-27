@@ -45,6 +45,7 @@ Plug 'hashivim/vim-terraform', { 'for': 'terraform' }                " Terraform
 Plug 'fatih/vim-go', { 'for': 'go'}                                  " Support go development
 Plug 'saltstack/salt-vim', { 'for': 'sls' }                          " Enable salt support
 Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }           " Typescript support
+Plug 'nathangrigg/vim-beancount', { 'for': 'beancount' }           " Typescript support
 
 call plug#end()   				            " end vundle managed plugins
 

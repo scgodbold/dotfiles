@@ -124,6 +124,10 @@ augroup filetypedetect
         \,SaltFile
         \ setfiletype sls
 
+    autocmd BufNewFile,BufRead
+        \ *.beancount
+        \ setfiletype beancount
+
     " Run last, to try and determine filetype
     " from the first line of the script
     autocmd BufNewFile,BufRead,StdinReadPost
