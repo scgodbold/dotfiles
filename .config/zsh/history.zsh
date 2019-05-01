@@ -15,3 +15,6 @@ export HISTFILE=${HOME}/.zsh_history
 
 # Vim mode disables reverse history search, fix that
 bindkey '^R' history-incremental-search-backward
+
+# Plz
+alias pls='sudo $(fc -ln -1)'
