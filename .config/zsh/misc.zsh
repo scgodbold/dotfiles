@@ -14,6 +14,7 @@ export TIPZ_TEXT='Alias tip:'
 export ZSH_AUTOSUGGEST_USE_ASYNC=true
 
 alias be='bundle exec'
+alias tf='terraform'
 
 # Set prompt in zsh
 autoload -U promptinit
