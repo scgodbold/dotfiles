@@ -40,64 +40,6 @@ alias gsn='git shortlog -sn'
 
 alias gupm='_git_update_master'
 
-function gerrit_review() {
-    local PARAMS=""
-    while [[ $# -gt 0 ]]; do
-        case "$1" in
-            -d|--draft)
-                local cmd="drafts"
-                shift
-                ;;
-            -b|--branch)
-                local branch="${2}"
-                shift 2
-                ;;
-            -*|--*)  # Quit if bad args passed in
-                echo "Unknown option provided: $1"
-                exit 1
-                ;;
-            --) # End arg parsing
-                shift
-                break
-                ;;
-            *)  # Handle postional args
-                local PARAMS="$PARAMS $1"
-                shift
-                ;;
-        esac
-    done
-    eval set -- "$PARAMS"
-
-    if [ -z ${branch} ]; then
-        local branch="master"
-    fi
-
-    if [ -z ${cmd} ]; then
-        local cmd="publish"
-    fi
-
-    if [ "$#" -eq "0" ]; then
-        git push origin HEAD:refs/${cmd}/${branch}
-        return 0
-    fi
-
-    if [ "$#" -eq "1" ]; then
-        git push origin HEAD:refs/${cmd}/${branch}/"$1"
-        return 0
-    fi
-
-    cat <<EOF
-Usage: gerrit_review [options] [topic]
-
-    Options:
-        -[-d]raft       Sets the review as a draft and will not actually publish it for review
-        -[-b]ranch      Sets which branch the review is for, defaults to "master"
-
-    TOPIC - An optional argument that sets the topic of the review, will be omited if not provided
-EOF
-    return 1
-}
-
 alias gaar='git add -u && git commit --amend --no-edit && git review'
 
 
