@@ -18,6 +18,7 @@
     ddraft = "!gerrit_review -d -b develop"
     amend = "commit --amend --no-edit"
     amendAndReview = "!f() { git add -u; git amend; git review; };f"
+    ego = "!git log --no-merges --author=$USER --shortstat | awk '/^ [0-9]/ { f += $1; i += $4; d += $6 } END { printf(\"%d files changed, %d insertions(+), %d deletions(-)\", f, i, d) }'"
 [core]
     excludesfile = ~/.gitignore
     pager = less -S
