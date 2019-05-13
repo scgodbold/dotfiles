@@ -1,25 +1,9 @@
-" Config for vim
-"
 " Author: Scott Godbold
-"
-" -----------------------------------------------------------------------
+" vi:set foldlevel=0
 
-" Table of Contents                                            *contents*
-
-"   01. Plugin Settings ................................. |plugin_config|
-"   02. Colors ........................................... |color_scheme|
-"   03. Tabs and Spaces ................................... |tabs_spaces|
-"   04. UI Configuration .................................... |ui_config|
-"   05. Searching ....................................... |search_config|
-"   06. Folding ........................................ |folding_config|
-"   07. Key Bindings ........................................ |key_binds|
-"   08. Backups & Undos ................................. |backups_undos|
-
-" -----------------------------------------------------------------------
-" 01. Plugin Settings                                     *plugin_config*
-" -----------------------------------------------------------------------
-" download vim-plug if missing
+" Plugins {{{1
 if empty(glob('~/.vim/autoload/plug.vim'))
+    " download vim-plug if missing
     silent! execute '!curl --create-dirs -fsSLo ~/.vim/autoload/plug.vim https://raw.github.com/junegunn/vim-plug/master/plug.vim'
     augroup pluginstaller
         autocmd VimEnter * silent! PlugInstall
@@ -57,9 +41,8 @@ let g:terraform_align=1
 " Local Vim environment uses this to tell it to build on write
 let g:autocheck_onwrite = 1
 
-" -----------------------------------------------------------------------
-" 02. Colors                                               *color_scheme*
-" -----------------------------------------------------------------------
+" }}}
+" UI {{{1
 set background=dark		                " All about the dark terminals
 syntax enable			                " Enable Syntax Highlighting
 silent! colorscheme sierra              " our colorscheme definition
@@ -78,9 +61,7 @@ let g:lightline = {
             \ 'colorscheme': 'wombat',
             \ }
 
-" -----------------------------------------------------------------------
-" 03. Tabs & Spaces                                         *tabs_spaces*
-" -----------------------------------------------------------------------
+" Section: Tabs & Spaces
 set tabstop=4			" 4 spaces == 1 tab
 set softtabstop=4		" number of spaces added/removed while editing
 set shiftwidth=4		" Sets spaces shifted when using [<<] or [>>]
@@ -107,9 +88,8 @@ augroup stripwhitespace
     autocmd BufWritePre * :%s/\s\+$//e
 augroup END
 
-" -----------------------------------------------------------------------
-" 04. UI Configuration                                        *ui_config*
-" -----------------------------------------------------------------------
+" }}}
+" UI Configuration {{{1
 set number			                " show line numbers
 set scrolloff=5                     " keep 5 lines from the edge of the screen
 set cursorline                      " horizontal line showing me where I am cause I am stupid
@@ -121,9 +101,8 @@ set splitright                      " vert splits open to the right
 set splitbelow                      " horizontal splits open below
 set laststatus=2                    " Make our lightline visible always
 
-" -----------------------------------------------------------------------
-" 05. Searching                                           *search_config*
-" -----------------------------------------------------------------------
+" }}}
+" Searching {{{1
 set incsearch                       " search as characters get entered
 set hlsearch                        " highlight matches
 set ignorecase                      " case insensitive searching
@@ -134,17 +113,16 @@ if executable('ag')
     set grepprg=ag\ --nogroup\ --nocolor
 endif
 
-" -----------------------------------------------------------------------
-" 06. Folding                                            *folding_config*
-" -----------------------------------------------------------------------
+" }}}
+" Folding {{{1
 set foldenable          " I want to fold
-set foldlevelstart=5    " Show most of the folds to begin with
+set foldlevelstart=0    " Show most of the folds to begin with
 set foldlevel=99        " Gimme all dem folds
-set foldmethod=indent   " Fold on indent levels
+set foldmethod=marker   " Fold on indent levels
+set foldcolumn=4        " Show folds visually
 
-" -----------------------------------------------------------------------
-" 07. Key Bindings                                            *key_binds*
-" -----------------------------------------------------------------------
+" }}}
+" Key Bindings {{{1
 let mapleader=' '
 
 " move visually vertically not by line by default
@@ -171,7 +149,6 @@ nnoremap <leader>n :setlocal number! number?<CR>
 
 " toggles paste mode
 nnoremap <leader>P :setlocal paste! paste?<CR>
-
 
 " Allow for <leader>\ and <leader>- to open vimsplits
 nnoremap <leader>\ :vsplit<CR>
@@ -208,9 +185,8 @@ nnoremap <leader>b <C-t>
 " Close preview window
 nnoremap <leader>x <C-w>z
 
-" -----------------------------------------------------------------------
-" 08. Backups & Undos                                     *backups_undos*
-" -----------------------------------------------------------------------
+" }}}
+" Backups & Undo {{{1
 set backupdir=~/.vim/cache/backup//
 set undodir=~/.vim/cache/undo//
 set directory=~/.vim/cache/swap//
@@ -219,3 +195,4 @@ set directory=~/.vim/cache/swap//
 set undofile                " persistent undo == $$$$
 let undolevels=500          " undo all the things
 let undoreload=500          " and the reload
+"}}}

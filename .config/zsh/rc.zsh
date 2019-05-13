@@ -17,6 +17,7 @@ source "${ZDOT_DIR}/clipboard.zsh"
 source "${ZDOT_DIR}/git.zsh"
 source "${ZDOT_DIR}/misc.zsh"
 source "${ZDOT_DIR}/history.zsh"
+source "${ZDOT_DIR}/completion.zsh"
 
 # Allow for temporary local changes that do not need to be source controlled
 if [ -e "${ZDOT_DIR}/local.zsh" ]; then
@@ -27,4 +28,5 @@ fi
 if ! zplug check;  then
 	zplug install
 fi
+
 zplug load
