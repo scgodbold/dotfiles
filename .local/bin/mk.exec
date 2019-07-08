@@ -30,17 +30,18 @@ PARAMS=""
 while (("\$#")); do
     case "\$1" in
         -d|--debug)
-            set -x
             DEBUG=true
+            echo "Debug Mode: \${DEBUG}"
+            set -x
             shift
-            ;;
-        -*|--*)  # Quit if bad args passed in
-            echo "Unknown option provided: \$1"
-            exit 1
             ;;
         --) # End arg parsing
             shift
             break
+            ;;
+        --*|-*)  # Quit if bad args passed in
+            echo "Unknown option provided: \$1"
+            exit 1
             ;;
         *)  # Handle postional args
             PARAMS="\$PARAMS \$1"
