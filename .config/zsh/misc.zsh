@@ -12,6 +12,7 @@ export GOPATH=${HOME}/repos/
 export WORKON_HOME=${HOME}/.virtualenvs
 export TIPZ_TEXT='Alias tip:'
 export ZSH_AUTOSUGGEST_USE_ASYNC=true
+export PATH=${PATH}:${HOME}/.local/bin/
 
 alias be='bundle exec'
 alias tf='terraform'
