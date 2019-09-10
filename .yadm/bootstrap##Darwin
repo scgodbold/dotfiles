@@ -1,6 +1,5 @@
 #! /bin/bash
 REPO_DIR="${HOME}/repos"
-OMZSH_DIR="${HOME}/.oh-my-zsh"
 
 BREW_PKGS=(
     "neovim"
@@ -13,6 +12,11 @@ BREW_PKGS=(
     "zsh"
     "direnv"
     "entr"
+    "shellcheck"
+)
+
+CASK_PKGS=(
+  "alacritty"
 )
 
 PIP_PKGS=(
@@ -21,22 +25,21 @@ PIP_PKGS=(
     "flake8"
     "pylint"
     "virtualenv"
-    "virtualenvwrapper"
-    "tmuxp"
+    "vim-vint"
 )
 
 function install_tmux_plugin_manager() {
     if [ ! -d "${HOME}/.tmux/plugins/tpm" ]; then
-        git clone https://github.com/tmux-plugins/tpm ${HOME}/.tmux/plugins/tpm
+        git clone https://github.com/tmux-plugins/tpm "${HOME}/.tmux/plugins/tpm"
     fi
 }
 
 function install_brew() {
     # This will likely never be executed as brew is going to be used to install yadm but just in case
-    if [ ! $(command -v brew) ]; then
+    if [ ! "$(command -v brew)" ]; then
         /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     fi
-    if [ ! $(brew tap | grep "caskroom/cask") ]; then
+    if [ ! "$(brew tap | grep 'caskroom/cask')" ]; then
         brew tap caskroom/cask
     fi
 }
@@ -44,9 +47,10 @@ function install_brew() {
 function install_pkgs() {
     # Install brew packages and link them
     brew install $(printf " %s" "${BREW_PKGS[@]}")
+    brew cask install $(printf " %s" "${CASK_PKGS[@]}")
     brew link python python3  # These are not linked by default and we want this
 
-    sudo /usr/local/bin/pip3 install $(printf " %s" "${PIP_PKGS[@]}")
+    /usr/local/bin/pip3 install --user $(printf " %s" "${PIP_PKGS[@]}")
 }
 
 function install_alacritty() {
@@ -71,16 +75,15 @@ function bootstrap_vim() {
 }
 
 function build_directories() {
-    mkdir -p ${REPO_DIR}/py
-    mkdir -p ${REPO_DIR}/go
+    mkdir -p ${REPO_DIR}/src
+    mkdir -p ${REPO_DIR}/bin
 }
 
 function main(){
     install_brew
     install_pkgs
-    install_alacritty
     bootstrap_vim
-    install_tmux_plugin_manager() {
+    install_tmux_plugin_manager
     build_directories
 }
 
