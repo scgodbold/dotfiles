@@ -13,7 +13,7 @@ Config {
    , sepChar =  "%"   -- delineator between plugin names and straight text
    , alignSep = "}{"  -- separator between left-right alignment
    -- , template = "%battery% | %multicpu% | %coretemp% | %memory% | %dynnetwork% }{ %RJTT% | %date% || %kbd% "
-   , template = "%StdinReader% }{ %multicpu% | %coretemp% | %memory% | %dynnetwork% | %KARB% | %date% || %kbd% "
+   , template = "%StdinReader% }{ %multicpu% | %coretemp% | %memory% | %dynnetwork% | %vpn% | %KARB% | %date% || %kbd% "
 
    -- general behavior
    , lowerOnStart =     True    -- send to bottom of window stack on start
@@ -104,6 +104,7 @@ Config {
         , Run Kbd            [ ("us(dvorak)" , "<fc=#00008B>DV</fc>")
                              , ("us"         , "<fc=#8B0000>US</fc>")
                              ]
-        ]
+        , Run Com "/home/s.godbold/.bin/vpn.active" [] "vpn" 3600
         , Run StdinReader
+        ]
    }
