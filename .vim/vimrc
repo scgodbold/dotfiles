@@ -12,7 +12,6 @@ endif
 
 call plug#begin('~/.vim/plugged')    		" Define plugins
 
-" Plug 'w0ng/vim-hybrid'                    " My fallback colorscheme, always a good choice
 Plug 'alessandroyorba/sierra'               " Sierra colors, the new hotness
 Plug 'itchyny/lightline.vim'                " A lighter status line than airline
 Plug 'christoomey/vim-tmux-navigator'       " Make vim and tmux play together
@@ -22,7 +21,6 @@ Plug 'tpope/vim-vinegar'                    " File navigation
 Plug 'tpope/vim-commentary'                 " comment out things
 Plug 'tpope/vim-dispatch'                   " Background processes
 Plug 'tpope/vim-eunuch'                     " linux defaults
-Plug 'tpope/vim-surround'                   " surround movements
 Plug 'airblade/vim-gitgutter'               " git gutters
 
 " Filetype specific plugins
